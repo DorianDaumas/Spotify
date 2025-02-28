@@ -33,9 +33,9 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
     - 2 Une sidebar à gauche "Bibliothèque" qui affiche les albums / playlists / titres likées par l'user avec possibilité de pouvoir plier / déplier celle-ci pour avoir plus d'info et un mini filtre une fois déplier.
     - 3 Un footer qui contient le player (à noter qu'il y a un 2eme Footer contenant les infos de spotify comme les liens utiles, réseaux sociaux etc inclus dans chaque page de l'application en bas comme sur spotify original).
     - 4 La Page à affichée
- 
 
-                                                                                                ## Fonctionalités 
+
+## Fonctionnalitées
 
 ### Connexion & Auth & route
 
