@@ -57,7 +57,7 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
   -  Possibilité d'écouter dirrectement les artistes, albums, tracks ou playlist via un hover sur ces derniers
   -  Pouvoir cliquer sur les images ou nom d'artistes, albums, playlists, tracks pour se rendre dirrectement sur leur pages correspondantes.
   -  Afficher une page dédié contenant l'entiereté des differentes section au click sur les lien "Tout afficher" à droite des sections.
-  ![Capture d’écran 2025-02-28 185923](https://github.com/user-attachments/assets/e808d3e5-d3c5-4c26-b7c8-7cbd12549663 =250x)
+  ![Capture d’écran 2025-02-28 185923](https://github.com/user-attachments/assets/e808d3e5-d3c5-4c26-b7c8-7cbd12549663=250x)
 
     
 
