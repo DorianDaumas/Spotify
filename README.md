@@ -57,6 +57,9 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
   -  Possibilité d'écouter dirrectement les artistes, albums, tracks ou playlist via un hover sur ces derniers
   -  Pouvoir cliquer sur les images ou nom d'artistes, albums, playlists, tracks pour se rendre dirrectement sur leur pages correspondantes.
   -  Afficher une page dédié contenant l'entiereté des differentes section au click sur les lien "Tout afficher" à droite des sections.
+  ![Capture d’écran 2025-02-28 185923](https://github.com/user-attachments/assets/e808d3e5-d3c5-4c26-b7c8-7cbd12549663)
+
+    
 
 - #### Sidebar Bibliothèque
   - Menu dépliant qui permet d'afficher les albums, playlist et tracks likés par l'user. L'état du menu est fermé de base, quand le menu est fermé on vois seulement les images des différents item likés.
@@ -72,6 +75,8 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
     - La fille d'attente affiche le morceaux qui est écouter actuellement
     - Des suggestions d'autres morceaux via l'api de spotify
     - Chaques suggestions est cliquables et permet de rediriger vers sa page correspondante
+    ![Capture d'écran 2025-02-28 185422](https://github.com/user-attachments/assets/96a35c5f-29f6-4bb8-a5b6-98d50b59cbe9)
+
 
 - #### Pages Profil
   - Affiche la page profil de l'user
