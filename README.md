@@ -63,6 +63,8 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
     Dans l'état ouvert on y vois aussi les noms et le type
   - Un mini filtre qui permet d'afficher soit uniquement les albums, soit les playlist liké par l'user ( par défaut tout est affichés )
   - Au click sur un item il redirige directement sur sa page correspondante.
+  ![Capture d’écran 2025-02-28 185716](https://github.com/user-attachments/assets/3e8e4666-bec7-4a7e-ac77-c3a16c2772f1)
+  
 
 - #### Player
   - Le player est une library tierce (https://github.com/gilbarbara/react-spotify-web-playback/tree/main). Je compte créer mon propre player celui-ci ne me convient pas mais sa sera sur une v2
