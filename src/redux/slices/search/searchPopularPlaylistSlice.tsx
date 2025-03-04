@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { PopularPlaylists, RootSearchPopularPlaylist } from './searchPopularPlaylist.interface';
+import { PopularPlaylists, RootSearchPopularPlaylist } from '../../interfaces/search/searchPopularPlaylist.interface';
 
 const initialState: RootSearchPopularPlaylist = {
     playlists: {

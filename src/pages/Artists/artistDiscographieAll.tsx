@@ -30,7 +30,7 @@ export const ArtistDiscographieAll = () => {
     );
     if (!discographieData) return null;
 
-    const allUris = [...discographieData.items.map((el) => el.uri)] 
+    // const allUris = [...discographieData.items.map((el) => el.uri)] 
     console.log();
     
     return (
@@ -51,11 +51,11 @@ export const ArtistDiscographieAll = () => {
                                 <Typography variant="subtitle1" style={{textTransform: "capitalize"}}>{album.album_type} • {convertDateReturnYears(album.release_date)} • {album.total_tracks} titres</Typography>
                                 <br></br>
                                 <div>
-                                    <BtnPlay info={{type: album.type, uri: album.uri}} ids={album.id} offset={0} uris={allUris}/>
+                                    <BtnPlay info={{context_uri: album.uri, uri: album.uri, name: album.name}}/>
                                 </div>
                             </div>
                         </div>
-                        <AlbumTracks allUris={allUris} uri={album.uri} albumId={album.id} />
+                        <AlbumTracks uri={album.uri} albumId={album.id} />
                         <br></br>
                         <br></br>
                         <br></br>

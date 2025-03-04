@@ -1,31 +1,17 @@
 import { Box, Card, CardActionArea, CardMedia, CardContent, Typography, Tooltip } from "@mui/material"
 import { Link } from "react-router"
-import { Albums, Item3 } from "../../redux/slices/search/searchGlobal.interface"
+import { Albums } from "../../redux/interfaces/search/searchGlobal.interface"
 import { AnimatePresence, motion } from "framer-motion";
 import { BtnPlay } from "../player/btnPlay";
-import { setInfoBtn } from "../../redux/slices/player/playerInfoReadSong";
-import { useDispatch } from "react-redux";
 import { useState } from "react";
 
 export const SearchResultAlbum = (albums: Albums) => {
-    const dispatch = useDispatch();
 
     const [hovered, setHovered] = useState({
         hovered: false,
         id: ''
     })
 
-   const songData = (album: Item3) => {
-    const info = {
-        info: {
-            name: album.name,
-            uri: album.uri,
-            type: album.type,
-            id: album.id
-        }
-    }
-        dispatch(setInfoBtn(info))
-   }
     
     return (
     <>
@@ -54,8 +40,8 @@ export const SearchResultAlbum = (albums: Albums) => {
                             >
                             {
                                 hovered.hovered && hovered.id === album.id ?
-                                <div onClick={() => songData(album)} style={{position: 'absolute', right: 0, top: '40%'}}>
-                                    <BtnPlay info={{type: album?.type ?? '' , uri: album?.uri ?? '', name: album.name}} ids={album.id} offset={0} uris={album?.uri ?? ''}/>
+                                <div style={{position: 'absolute', right: 0, top: '40%'}}>
+                                    <BtnPlay info={{context_uri: album.uri, uri: album.uri, name: album.name}}/>
                                 </div>
                                 : null 
                             }                                        

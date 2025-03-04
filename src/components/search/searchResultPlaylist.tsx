@@ -1,31 +1,17 @@
 import { Typography, Box, Card, CardActionArea, CardMedia, CardContent, Tooltip } from "@mui/material"
 import { Link } from "react-router"
-import { Item4 } from "../../redux/slices/search/searchGlobal.interface"
+import { Item4 } from "../../redux/interfaces/search/searchGlobal.interface"
 import { AnimatePresence, motion } from "framer-motion";
 import { BtnPlay } from "../player/btnPlay";
-import { setInfoBtn } from "../../redux/slices/player/playerInfoReadSong";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 
 export const SearchResultPlaylist = (playlist: Item4) => {
-    const dispatch = useDispatch();
 
     const [hovered, setHovered] = useState({
         hovered: false,
         id: ''
     })
 
-   const songData = (playlist: Item4) => {
-    const info = {
-        info: {
-            name: playlist.name ?? '',
-            uri: playlist.uri ?? '',
-            type: playlist.type ?? '',
-            id: playlist.id ?? ''
-        }
-    }
-        dispatch(setInfoBtn(info))
-   }
    
   if (Object.keys(playlist).length === 0 || !playlist.public || playlist.owner?.display_name === 'Spotify') return null
 
@@ -52,8 +38,8 @@ export const SearchResultPlaylist = (playlist: Item4) => {
                         >
                     {
                         hovered.hovered && hovered.id === playlist.id ?
-                        <div onClick={() => songData(playlist)} style={{position: 'absolute', right: 0, top: '40%'}}>
-                            <BtnPlay info={{type: playlist?.type ?? '' , uri: playlist?.uri ?? '', name: playlist.name}} ids={playlist.id} offset={0} uris={playlist?.uri ?? ''}/>
+                        <div style={{position: 'absolute', right: 0, top: '40%'}}>
+                            <BtnPlay info={{context_uri: playlist.uri ?? '', uri: playlist.uri ?? '', name: playlist.name ?? ''}}/>
                         </div>
                         : null 
                     }                                        

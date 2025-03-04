@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootUserSavedTracks, UserSavedTracks } from './userSavedTracks.interface';
+import { RootUserSavedTracks, UserSavedTracks } from '../../interfaces/user/userSavedTracks.interface';
 
 const initialState: RootUserSavedTracks = {
     savedTracks: {

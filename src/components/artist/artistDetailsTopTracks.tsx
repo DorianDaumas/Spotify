@@ -1,5 +1,5 @@
 // import Card from "@mui/material/Card"
-import { RootTopTrack } from "../../redux/slices/artist/artistTopTracks.interface"
+import { RootTopTrack } from "../../redux/interfaces/artist/artistTopTracks.interface"
 // import CardActionArea from "@mui/material/CardActionArea"
 // import CardMedia from "@mui/material/CardMedia"
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
@@ -10,8 +10,6 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Tooltip from '@mui/material/Tooltip';
 import { useEffect, useState } from 'react';
 import { formatArtistIds } from "../../utils/formatArtistIds"
-import { useDispatch } from "react-redux"
-import { setNewUris } from "../../redux/slices/player/playerSice"
 import { TableRowPlay } from "../player/tableRowPlay"
 
 interface ArtistDetailsTopTracksProps extends RootTopTrack {
@@ -23,20 +21,7 @@ export const ArtistDetailsTopTracks = (props: ArtistDetailsTopTracksProps) => {
     const [refreshComp, setrefreshComp] = useState<number>(0);
     const [open, setOpen] = useState(false);
     const [hoveredRow, setHoveredRow] = useState<number | null>(null);
-    const dispatch = useDispatch();
-    const mergedUris = [...props.tracks.map((el) => el.uri)]
 
-    const listenSong = (offset: number) => {
-        const state = {
-            offset: offset,
-            info: {
-                type: 'track',
-                uri: mergedUris
-            },
-            uris: mergedUris
-        }       
-        dispatch(setNewUris(state))
-    }
     
     useEffect(() => {
         setrefreshComp(+1)
@@ -80,8 +65,8 @@ export const ArtistDetailsTopTracks = (props: ArtistDetailsTopTracksProps) => {
                                     key={index}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
-                                <TableCell onClick={() => listenSong(index)} align="left">
-                                    <TableRowPlay hoveredRow={hoveredRow} index={index} id={row.id} />
+                                <TableCell align="left">
+                                    <TableRowPlay type='playlist' hoveredRow={hoveredRow} uri={row.uri} index={index} id={row.id} />
                                 </TableCell>
                                 <TableCell align="left">
                                     <div style={{display: 'flex', alignItems: "center"}}>

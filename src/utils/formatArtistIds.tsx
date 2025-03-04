@@ -1,4 +1,4 @@
-import { Artist } from "../redux/slices/playlist/playlist.interface";
+import { Artist } from "../redux/interfaces/playlist/playlist.interface";
 
 export const formatArtistIds = (artists: Artist[]) => {
     const artistIds = artists.map(artist => artist.id);

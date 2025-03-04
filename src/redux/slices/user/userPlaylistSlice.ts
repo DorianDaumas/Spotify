@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RootUserPlaylist } from './userPlaylist.interface';
+import { RootUserPlaylist } from '../../interfaces/user/userPlaylist.interface';
 
 const initialState: RootUserPlaylist = {
     userPlaylist: {

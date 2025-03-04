@@ -5,30 +5,30 @@ import { Link } from 'react-router';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { BtnPlay } from '../player/btnPlay';
-import { useDispatch } from 'react-redux';
-import { setInfoBtn } from '../../redux/slices/player/playerInfoReadSong';
-import { Item } from '../../redux/slices/user/userTopArtist.interface';
+// import { useDispatch } from 'react-redux';
+// import { setInfoBtn } from '../../redux/slices/player/playerInfoReadSong';
+// import { Item } from '../../redux/slices/user/userTopArtist.interface';
 
 export const UserTopArtists = () => {
     const {data, isLoading, error } = useGetUserTopArtistQuery();
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const [hovered, setHovered] = useState({
         hovered: false,
         id: '',
     })
 
-    const songData = (data: Item) => {
-        const info = {
-            info: {
-                name: data.name,
-                uri: data.uri,
-                type: data.type,
-                id: data.id
-            }
-        }
-        dispatch(setInfoBtn(info))
-    }
+    // const songData = (data: Item) => {
+    //     const info = {
+    //         info: {
+    //             name: data.name,
+    //             uri: data.uri,
+    //             type: data.type,
+    //             id: data.id
+    //         }
+    //     }
+    //     dispatch(setInfoBtn(info))
+    // }
 
     if (isLoading) return (
         <div style={{margin: '10px 40px 20px 40px'}}>
@@ -79,8 +79,8 @@ export const UserTopArtists = () => {
                                         >
                                         {
                                             hovered.hovered && hovered.id === data.id ?
-                                            <div onClick={() => songData(data)} style={{position: 'absolute', right: 0, top: '40%'}}>
-                                                <BtnPlay info={{type: data.type, uri: data.uri, name: data.name}} ids={data.id} offset={0} uris={data.uri}/>
+                                            <div style={{position: 'absolute', right: 0, top: '40%'}}>
+                                                <BtnPlay info={{context_uri: data.uri, uri: data.uri, name: data.name, type: data?.type}}/>
                                             </div>
                                             : null 
                                         }                                        

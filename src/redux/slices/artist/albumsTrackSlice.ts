@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootAlbumTracks } from './albumTracks.interface';
+import { RootAlbumTracks } from '../../interfaces/artist/albumTracks.interface';
 
 const initialState: RootAlbumTracks = {
     albumTracksitems: {

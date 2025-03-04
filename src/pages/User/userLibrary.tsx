@@ -18,7 +18,7 @@ export const UserLibrary = () => {
         setUris(retriveUris)        
     }, [data])
 
-    const ids = data?.items.map((el) => el.track.id)
+    // const ids = data?.items.map((el) => el.track.id)
         
     if (isLoading) return (
         <div style={{height: '100vh'}}>
@@ -38,7 +38,7 @@ export const UserLibrary = () => {
             <LibraryHeader />
         </div>
         <div style={{margin: '30px'}}>
-        <BtnPlay info={{type: 'playlist' , uri: uris, name: 'user_playlist'}} ids={ids} offset={0} uris={uris}/>
+        <BtnPlay info={{uri: uris, name: 'album.name', type: 'user-liked-tracks'}}/>
         <TableContainer elevation={0} component={Paper}>
               <Table stickyHeader sx={{ background: '#121212' }} size="small" aria-label="a dense table">
                   <TableHead>
@@ -51,7 +51,7 @@ export const UserLibrary = () => {
                   </TableRow>
                   </TableHead>
             {data?.items.map((item, index) => (
-                <LibraryTracks key={index} index={index} data={item}/>
+                <LibraryTracks uris={uris} key={index} index={index} data={item}/>
             ))}
               </Table>
               </TableContainer>

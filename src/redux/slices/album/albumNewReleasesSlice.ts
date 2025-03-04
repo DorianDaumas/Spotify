@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Albums, RootAlbumsNewReleases } from './albumNewReleases.interface';
+import { Albums, RootAlbumsNewReleases } from '../../interfaces/album/albumNewReleases.interface';
 
 const initialState: RootAlbumsNewReleases = {
   albums: {

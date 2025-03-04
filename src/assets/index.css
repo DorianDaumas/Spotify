@@ -156,3 +156,34 @@ a:hover {
   width: 100%;
   background-color: red;
 }
+
+.pastille-on {
+  position: absolute;
+  bottom: -7px;
+  width: 10px;
+  height: 10px;
+  background: green;
+  left: -18px;
+  border-radius: 50%;
+  animation: blinky 1s ease-in-out alternate infinite;
+}
+
+@keyframes blinky {
+  from {
+    background: green;
+  }
+
+  to {
+    background: black;
+  }
+}
+
+.pastille-off {
+  position: absolute;
+  bottom: -7px;
+  width: 10px;
+  height: 10px;
+  background: #dedede;
+  left: -18px;
+  border-radius: 50%;
+}

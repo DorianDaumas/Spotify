@@ -1,5 +1,5 @@
 import Card from "@mui/material/Card";
-import { Discographie, Item } from "../../redux/slices/artist/artistDiscographie.interface"
+import { Discographie } from "../../redux/interfaces/artist/artistDiscographie.interface"
 import CardActionArea from "@mui/material/CardActionArea";
 import CardMedia from "@mui/material/CardMedia";
 import { Typography } from "@mui/material";
@@ -7,30 +7,16 @@ import { convertDateReturnYears } from '../../utils/convertDate';
 import { Link } from 'react-router'
 import { AnimatePresence, motion } from "framer-motion";
 import { BtnPlay } from "../player/btnPlay";
-import { setInfoBtn } from "../../redux/slices/player/playerInfoReadSong";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 
 
 export const ArtistDiscographie = (props: Discographie) => {
-  const dispatch = useDispatch();
 
   const [hovered, setHovered] = useState({
       hovered: false,
       id: ''
   })
 
- const songData = (album: Item) => {
-  const info = {
-      info: {
-          name: album.name,
-          uri: album.uri,
-          type: album.type,
-          id: album.id
-      }
-  }
-      dispatch(setInfoBtn(info))
- }
   return (
     <div>
       <br></br>
@@ -71,8 +57,8 @@ export const ArtistDiscographie = (props: Discographie) => {
                         >
                     {
                         hovered.hovered && hovered.id === album.id ?
-                        <div onClick={() => songData(album)} style={{position: 'absolute', right: 0, top: '40%'}}>
-                            <BtnPlay info={{type: album?.type ?? '' , uri: album?.uri ?? '', name: album.name}} ids={album.id} offset={0} uris={album?.uri ?? ''}/>
+                        <div style={{position: 'absolute', right: 0, top: '40%'}}>
+                            <BtnPlay info={{context_uri: album.uri, uri: album.uri, name: album.name}}/>
                         </div>
                         : null 
                     }                                        

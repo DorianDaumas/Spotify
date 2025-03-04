@@ -2,7 +2,7 @@ export interface RootArtistDetail {
     artists: Artist[];
   }
   
-  interface Artist {
+export interface Artist {
     external_urls: Externalurls;
     followers: Followers;
     genres: string[];

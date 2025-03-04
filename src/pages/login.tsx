@@ -11,8 +11,11 @@ import { clearToken } from "../redux/slices/auth/authSlice"
 
 export const Login = () => {
     const dispatch = useDispatch()
+    const token = window.localStorage.getItem("token")
     useEffect(() => {
-      dispatch(clearToken())
+        if (!token) {
+            dispatch(clearToken())            
+        }
     }, [])
     
     const CLIENT_ID = import.meta.env.VITE_CLIENT_ID 

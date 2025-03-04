@@ -1,10 +1,10 @@
-import type { PlaylistDetails } from "../../redux/slices/playlist/playlist.interface";
+import type { PlaylistDetails } from "../../redux/interfaces/playlist/playlist.interface";
 import { PlaylistHeader } from "../../components/playlist/playlistHeader";
 import { useDeletePlaylistMutation, useGetPlaylistDetailsQuery, useLazyCheckIsSavedPlaylistQuery, useSavePlaylistMutation } from "../../redux/services/spotifyApi";
 import TablePlaylist from "../../components/playlist/tablePlaylist";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
-import { BtnPlay } from "../../components/player/btnPlay";
+// import { BtnPlay } from "../../components/player/btnPlay";
 import Tooltip from "@mui/material/Tooltip";
 import { Alert, IconButton, Snackbar, SnackbarCloseReason } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { setRefreshComponent } from "../../redux/slices/refreshComponentSlice";
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+import { BtnPlay } from "../../components/player/btnPlay";
 
 export const PlaylistDetail = () => {
   const dispatch = useDispatch()
@@ -55,7 +56,7 @@ export const PlaylistDetail = () => {
   );
   if (error || !data) return <span>Une erreur est survenu...</span>;
 
-  const ids = data?.tracks.items.map((el) => el.track.id)
+  // const ids = data?.tracks.items.map((el) => el.track.id)
 
 
   const addSnackbar = () => {
@@ -103,7 +104,7 @@ const addRemoveLibrary = () => {
       </div>
       <div style={{margin: '0px 60px'}}>
       <div style={{display: 'flex', alignItems: 'center'}}>
-            <BtnPlay info={{type: data.type, uri: data.uri}} ids={ids} offset={0} uris={data?.uri ?? ""}/>
+            <BtnPlay info={{context_uri: data.uri, uri: data.uri, name: data.name, type: "playlist"}}/>
             <Tooltip title={alreadyInLibrary && alreadyInLibrary[0] ? "Supprimer de la Bibliothèque" : "Sauvegarder dans la Bibliothèque"} placement='right'>
                 {
                     alreadyInLibrary && alreadyInLibrary[0] ?

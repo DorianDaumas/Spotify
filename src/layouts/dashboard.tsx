@@ -1,13 +1,12 @@
 import { Outlet, useNavigate, useLocation, Link } from 'react-router';
 import { DashboardLayout, ThemeSwitcher } from '@toolpad/core/DashboardLayout';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { clearToken } from '../redux/slices/auth/authSlice';
 import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import { useState, useEffect } from 'react';
-import { FooterPlayer } from '../components/player/footerPlayer';
 import { Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Typography, Avatar, Menu, MenuItem, LinearProgress, ListItemButton, Chip } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGetUserProfilQuery } from '../redux/services/spotifyApi';
@@ -20,15 +19,13 @@ import { Footer } from '../components/footer';
 import GraphicEqRoundedIcon from '@mui/icons-material/GraphicEqRounded';
 import CloseIcon from '@mui/icons-material/Close';
 import { PlayerQueue } from '../components/player/playerQueue';
-import { setQueue } from '../redux/slices/player/playerQueueSlice';
-import { spotifyApi } from 'react-spotify-web-playback';
-import { RootState } from '../redux/store';
+import { PlayerCustom } from '../components/player/playerCustom';
 
 export default function Layout() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const token = useSelector((state: RootState) => state.auth.token);  
+  // const token = useSelector((state: RootState) => state.auth.token);  
   const [history, setHistory] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(-1);
   const { data, isLoading, error } = useGetUserProfilQuery()
@@ -209,8 +206,14 @@ export default function Layout() {
               '& .MuiStack-root' : {width: '100%'}
              }}}
         >
-          <Stack direction="row" alignItems="center" spacing={1} >
-            <div style={{marginLeft: "13px", marginTop: '8px'}}>
+          <div style={{
+            position: 'absolute',
+            width: 'calc(100% - 60px)',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'}}>
+            <Stack direction="row" alignItems="center" spacing={1} >
+            <div style={{marginLeft: "13px", marginRight: "15px", marginTop: '8px'}}>
               <Link to='/home'>
                 <GraphicEqRoundedIcon/>
               </Link>
@@ -223,7 +226,6 @@ export default function Layout() {
             </IconButton>
           </Stack>
 
-          {/* Center section - Search bar */}
           <Box sx={{ 
             flex: 1,
             display: 'flex',
@@ -235,10 +237,10 @@ export default function Layout() {
   
           </Box>    
 
-          {/* Right section - Theme switcher */}
           <Box>
             <ToolbarActions/>
           </Box>
+          </div>
         </Stack>
     );
   }
@@ -263,31 +265,14 @@ export default function Layout() {
           </div>
           
       </div>
-      <PlayerQueue/>
+      <PlayerQueue />
     </Box>
   );
 
-  async function getMyQueue() { // La fonction doit être async
-    if (token) {
-      try {
-        const value = await spotifyApi.getQueue(token); // Attendre la résolution de la promesse
-        const getQueue = value;
-        const queue = {
-          queue: getQueue.queue,
-          currently_playing: getQueue.currently_playing
-        }
-        
-        dispatch(setQueue(queue))
-      } catch (error) {
-        console.error("Error getting queue:", error);
-      }
-    }
-  }
 
   const [dataFromChild, setDataFromChild] = useState(false);
-  const handleDataFromChild = (data: boolean) => {
+  const handleDataFromChild = (data: boolean) => {    
     setDataFromChild(data);
-    getMyQueue();
   };
 
   return (
@@ -366,7 +351,7 @@ export default function Layout() {
         {DrawerList2}
       </Drawer>
       </Box>
-      <FooterPlayer drawer={dataFromChild} toggleDrawer={handleDataFromChild}  />
+      <PlayerCustom drawer={dataFromChild} toggleDrawer={handleDataFromChild}  />
     </DashboardLayout>
   );
 }

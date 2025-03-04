@@ -1,7 +1,7 @@
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardMedia from "@mui/material/CardMedia";
-import type { AlbumDetailsType } from "../../redux/slices/album/album.interface";
+import type { AlbumDetailsType } from "../../redux/interfaces/album/album.interface";
 import { useEffect, useState } from "react";
 import { getImageGradient } from "../../utils/getBackgroundColor";
 import Typography from "@mui/material/Typography";

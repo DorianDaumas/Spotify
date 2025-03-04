@@ -1,7 +1,7 @@
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardMedia from "@mui/material/CardMedia";
-import { PlaylistDetails } from "../../redux/slices/playlist/playlist.interface";
+import { PlaylistDetails } from "../../redux/interfaces/playlist/playlist.interface";
 import { useEffect, useState } from "react";
 import { getImageGradient } from "../../utils/getBackgroundColor";
 import { Typography } from "@mui/material";

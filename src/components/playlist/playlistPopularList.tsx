@@ -6,31 +6,17 @@ import CardActionArea from '@mui/material/CardActionArea';
 import CardMedia from '@mui/material/CardMedia';
 import { Link } from 'react-router';
 import Tooltip from '@mui/material/Tooltip';
-import type { Item } from '../../redux/slices/search/searchPopularPlaylist.interface';
+import type { Item } from '../../redux/interfaces/search/searchPopularPlaylist.interface';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { BtnPlay } from '../player/btnPlay';
-import { useDispatch } from 'react-redux';
-import { setInfoBtn } from '../../redux/slices/player/playerInfoReadSong';
 
 
 export const Playlist = (data: Item) => {
-    const dispatch = useDispatch();
     const [hovered, setHovered] = useState({
         hovered: false,
         id: ''
     })
-    const songData = (data: Item) => {
-        const info = {
-            info: {
-                name: data.name ?? '',
-                uri: data.uri ?? '',
-                type: data.type ?? '',
-                id: data.id ?? ''
-            }
-        }
-            dispatch(setInfoBtn(info))
-    }
 
     if (Object.keys(data).length === 0 || data.owner?.display_name === 'Spotify') return null
     return (
@@ -56,8 +42,8 @@ export const Playlist = (data: Item) => {
                             >
                             {
                                 hovered.hovered && hovered.id === data.id ?
-                                <div onClick={() => songData(data)} style={{position: 'absolute', right: 0, top: '40%'}}>
-                                    <BtnPlay info={{type: data?.type ?? '' , uri: data?.uri ?? '', name: data?.name}} ids={data.id} offset={0} uris={data?.uri ?? ''}/>
+                                <div style={{position: 'absolute', right: 0, top: '40%'}}>
+                                    <BtnPlay info={{context_uri: data.uri ?? '', uri: data.uri ?? '', name: data.name ?? '', type: "miniature"}}/>
                                 </div>
                                 : null 
                             }                                        

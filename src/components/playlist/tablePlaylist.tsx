@@ -5,7 +5,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { PlaylistDetails } from '../../redux/slices/playlist/playlist.interface';
+import { PlaylistDetails } from '../../redux/interfaces/playlist/playlist.interface';
 import { convertirDuree } from '../../utils/covertDuration';
 import { convertDate } from '../../utils/convertDate';
 import { Typography } from '@mui/material';
@@ -13,28 +13,11 @@ import { Link } from 'react-router';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { formatArtistIds } from '../../utils/formatArtistIds';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setNewUris } from '../../redux/slices/player/playerSice';
 import { TableRowPlay } from '../player/tableRowPlay';
 
 export default function TablePlaylist(props: PlaylistDetails) {    
-  const dispatch = useDispatch()
   const [hoveredRow, setHoveredRow] = useState<number | null>(null);
   
-  const listenSong = (offset: number) => {
-    const state = {
-      offset: offset,
-      info: {
-          type: 'track',
-          uri: props.uri
-      },
-      uris: props.uri
-    }  
-    
-    dispatch(setNewUris(state))
-  }
-
-
   return (
     <TableContainer elevation={0} style={{ height: 670, width: '100%' }} component={Paper}>
       <Table stickyHeader sx={{ background: '#121212' }} aria-label="simple table">
@@ -56,8 +39,8 @@ export default function TablePlaylist(props: PlaylistDetails) {
               key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell onClick={() => listenSong(index)} align="left">
-                <TableRowPlay hoveredRow={hoveredRow} index={index} id={row.track.id} />
+              <TableCell align="left">
+                <TableRowPlay hoveredRow={hoveredRow} uri={row.track.uri} index={index} id={row.track.id} />
               </TableCell>
               <TableCell align="left">
                 <div style={{display: 'flex', alignItems: 'center'}}>
