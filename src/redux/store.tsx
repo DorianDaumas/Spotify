@@ -4,7 +4,7 @@ import { fetchPlaylist, getArtistInfo, getAlbumInfo, tracksInfo, tracksLyrics, u
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { authSlice } from './slices/auth/authSlice';
 import { getToken, callRefreshToken } from './services/auth';
-import { searchQuerySlice } from './slices/search/searchQuery';
+import { searchQuerySlice } from './slices/search/searchQuerySlice';
 import { playerSlice } from './slices/player/playerSice';
 import { playerTrackInfoSlice } from './slices/player/playerTracksInfoSlice';
 import {playerPlayEvent} from './slices/player/playerPlaySlice';

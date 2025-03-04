@@ -1,24 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Payload } from '../../../components/player/btnPlay';
 
-
-export interface PlayerUris {
-    ids?: string | string[];
-    info: {
-      type: string,
-      uri: string | string[],
-      hoverId?: string,
-      name?: string
-    }
-    offset?: number;
-    uris: string | string[];
-}
-
-const initialState: PlayerUris = {
-  offset: 1,
-  uris: [],
+const initialState: Payload = {
   info: {
-    type: '',
-    uri: ''
+    name: '',
+    uri: '',
+    offset: 1,
   }
 };
 
@@ -26,15 +13,12 @@ export const playerSlice = createSlice({
   name: 'player',
   initialState,
   reducers: {
-    setNewUris: (state, action: PayloadAction<PlayerUris>) => {
-     
-      state.offset = action.payload.offset;
-      state.uris = action.payload.info.uri;
+    setNewUris: (state, action: PayloadAction<Payload>) => {
+      state.info = action.payload.info;
     },
     getUris: (state) => state,
     clearUris: (state) => {
-      state.offset = 1;
-      state.uris = [];
+      state.info = { name: '', uri: '', offset: 1 };
     },
   },
 });

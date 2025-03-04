@@ -1,27 +1,31 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import type { PlaylistDetails } from '../slices/playlist/playlist.interface'
+import type { PlaylistDetails } from '../interfaces/playlist/playlist.interface'
 import type { RootState } from '../store'
-import { RootArtistDetail } from '../slices/artist/artist.interface';
-import { RootTopTrack } from '../slices/artist/artistTopTracks.interface';
-import { Discographie } from '../slices/artist/artistDiscographie.interface';
-import { AlbumTracks } from '../slices/artist/albumTracks.interface';
-import type { AlbumDetailsType } from '../slices/album/album.interface';
-import { TrackDetails } from '../slices/track/trackDetails.interface';
+import { RootArtistDetail } from '../interfaces/artist/artist.interface';
+import { RootTopTrack } from '../interfaces/artist/artistTopTracks.interface';
+import { Discographie } from '../interfaces/artist/artistDiscographie.interface';
+import { AlbumTracks } from '../interfaces/artist/albumTracks.interface';
+import type { AlbumDetailsType } from '../interfaces/album/album.interface';
+import { TrackDetails } from '../interfaces/track/trackDetails.interface';
 import { Lyrics } from '../slices/track/trackLyricsSlice';
-import { UserSavedTracks } from '../slices/user/userSavedTracks.interface';
-import { UserSavedAlbums} from '../slices/user/userSavedAlbums.interface';
-import { UserProfil } from '../slices/user/userProfil.interface';
-import { RootAlbumsNewReleases } from '../slices/album/albumNewReleases.interface';
-import { RootSearchPopularPlaylist } from '../slices/search/searchPopularPlaylist.interface';
-import { RootGlobalSearch } from '../slices/search/searchGlobal.interface';
+import { UserSavedTracks } from '../interfaces/user/userSavedTracks.interface';
+import { UserSavedAlbums} from '../interfaces/user/userSavedAlbums.interface';
+import { UserProfil } from '../interfaces/user/userProfil.interface';
+import { RootAlbumsNewReleases } from '../interfaces/album/albumNewReleases.interface';
+import { RootSearchPopularPlaylist } from '../interfaces/search/searchPopularPlaylist.interface';
+import { RootGlobalSearch } from '../interfaces/search/searchGlobal.interface';
 import { refreshSpotifyToken } from './auth';
 import { clearToken } from '../slices/auth/authSlice';
-import { UserPlaylist } from '../slices/user/userPlaylist.interface';
+import { UserPlaylist } from '../interfaces/user/userPlaylist.interface';
 import { RootDevice } from '../slices/player/playerDeviceSlice';
-import { RootUserTopArtist } from '../slices/user/userTopArtist.interface';
-import { RootUserTopTrack } from '../slices/user/userTopTrack.interface';
+import { RootUserTopArtist } from '../interfaces/user/userTopArtist.interface';
+import { RootUserTopTrack } from '../interfaces/user/userTopTrack.interface';
 import { RootRecommendationByGenre } from '../interfaces/recommendationByGenre.interface';
 import { BaseQueryApi, FetchArgs } from '@reduxjs/toolkit/query';
+import { RootPlayerState } from '../interfaces/player/playbackState.interface';
+import { RootStartPlayer } from '../interfaces/player/startPlayback.interface';
+import { RootQueue } from '../interfaces/player/playerQueue.interface';
+import { RootCurrentPlayingTrack } from '../interfaces/player/currentPlayingTrack.interface';
 
 const baseQueryConfig = fetchBaseQuery({
   baseUrl: 'https://api.spotify.com/v1/',
@@ -206,7 +210,7 @@ export const userInfos = createApi({
       providesTags: ['userTopArtist'],
     }),
     getUserTopTrack: builder.query<RootUserTopTrack, void>({
-      query: () => `me/top/tracks`,
+      query: () => `me/top/tracks?limit=8`,
       providesTags: ['userTopTrack'],
     }),
     saveAlbums: builder.mutation<string, { id: string; data: string[] }>({
@@ -279,11 +283,67 @@ interface state {
 export const playerData = createApi({
   reducerPath: 'playerData',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['shuffleQueue', 'getDevice'],
+  tagTypes: ['shuffleQueue', 'getDevice', 'getPlayerState', 'startPlayback', 'resumePlayback', 'playerQueue', 'pausePlayback', 'currentTrack', 'nextTrackPlayback', 'prevTrackPlayback', 'volumePlayback'],
   endpoints: (builder) => ({
     getdevice: builder.query<RootDevice , void>({
       query: () => `me/player/devices`,
       providesTags: ['getDevice'],
+    }),
+    getPlaybackState: builder.query<RootPlayerState , void>({
+      query: () => `me/player`,
+      providesTags: ['getPlayerState'],
+    }),
+    startPlayback: builder.mutation<string, { data: RootStartPlayer, device_id: string }>({
+      query: ({ data, device_id }) => ({
+        url: `me/player/play?device_id=${device_id}`,
+        method: 'PUT',
+        body: data,
+        providesTags: ['startPlayback'],
+      }),
+    }),
+    resumePlayback: builder.mutation<string, { data: RootStartPlayer, device_id: string }>({
+      query: ({ data, device_id }) => ({
+        url: `me/player/play?device_id=${device_id}`,
+        method: 'PUT',
+        body: data,
+        providesTags: ['resumePlayback'],
+      }),
+    }),
+    pausePlayback: builder.mutation<string, { device_id: string }>({
+      query: ({ device_id }) => ({
+        url: `me/player/pause?device_id=${device_id}`,
+        method: 'PUT',
+        providesTags: ['pausePlayback'],
+      }),
+    }),
+    nextTrackPlayback: builder.mutation<string, { device_id: string }>({
+      query: ({ device_id }) => ({
+        url: `me/player/next?device_id=${device_id}`,
+        method: 'POST',
+        providesTags: ['nextTrackPlayback'],
+      }),
+    }),
+    prevTrackPlayback: builder.mutation<string, { device_id: string }>({
+      query: ({ device_id }) => ({
+        url: `me/player/previous?device_id=${device_id}`,
+        method: 'POST',
+        providesTags: ['prevTrackPlayback'],
+      }),
+    }),
+    volumePlayback: builder.mutation<string, { device_id: string, volume_percent: number }>({
+      query: ({ device_id, volume_percent }) => ({
+        url: `me/player/volume?device_id=${device_id}&volume_percent=${volume_percent}`,
+        method: 'PUT',
+        providesTags: ['volumePlayback'],
+      }),
+    }),
+    getPlayerQueue: builder.query<RootQueue , void>({
+      query: () => `me/player/queue`,
+      providesTags: ['playerQueue'],
+    }),
+    getCurrentPlayingTrack: builder.query<RootCurrentPlayingTrack , void>({
+      query: () => `me/player/currently-playing`,
+      providesTags: ['currentTrack'],
     }),
     shuffleQueue: builder.query<state, state>({
       query: (shuffle) => ({
@@ -314,7 +374,16 @@ export const {
   useLazyCheckIsSavedPlaylistQuery
   } = userInfos
 export const { useGetPopularPlaylistQuery, useGetRecommendationOnGenreQuery, useGetGlobalSearchQuery } = search
-export const { useShuffleQueueQuery, useGetdeviceQuery } = playerData
+export const { useShuffleQueueQuery, 
+  useGetdeviceQuery, 
+  useGetPlaybackStateQuery, 
+  useStartPlaybackMutation, 
+  useGetPlayerQueueQuery, 
+  usePausePlaybackMutation,
+  useGetCurrentPlayingTrackQuery,
+  useNextTrackPlaybackMutation,
+  usePrevTrackPlaybackMutation,
+  useVolumePlaybackMutation } = playerData
 export const { useGetTrackLyricsQuery } = tracksLyrics
 export const { useGetTrackDetailsQuery } = tracksInfo
 export const { useGetPlaylistDetailsQuery } = fetchPlaylist

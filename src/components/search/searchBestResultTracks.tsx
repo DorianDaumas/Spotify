@@ -2,9 +2,9 @@ import { TableCell, TableRow, Typography } from '@mui/material'
 import { Link } from 'react-router'
 import { convertirDuree } from '../../utils/covertDuration'
 import { formatArtistIds } from '../../utils/formatArtistIds'
-import { Track } from '../../redux/slices/artist/artistTopTracks.interface'
-import { Track as TrackDetails } from '../../redux/slices/playlist/playlist.interface'
-import { Item } from '../../redux/slices/album/album.interface'
+import { Track } from '../../redux/interfaces/artist/artistTopTracks.interface'
+import { Track as TrackDetails } from '../../redux/interfaces/playlist/playlist.interface'
+import { Item } from '../../redux/interfaces/album/album.interface'
 
 type DataType = Track | TrackDetails | Item;
 

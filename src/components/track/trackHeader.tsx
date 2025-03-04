@@ -3,7 +3,7 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardMedia from "@mui/material/CardMedia";
 import { useEffect, useState } from "react";
 import { getImageGradient } from "../../utils/getBackgroundColor";
-import { TrackDetails } from "../../redux/slices/track/trackDetails.interface";
+import { TrackDetails } from "../../redux/interfaces/track/trackDetails.interface";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router";
 import { convertDateReturnYears } from "../../utils/convertDate";

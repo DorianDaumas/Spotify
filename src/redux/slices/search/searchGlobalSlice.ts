@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootGlobalSearch } from './searchGlobal.interface';
+import { RootGlobalSearch } from '../../interfaces/search/searchGlobal.interface';
 
 const initialState: RootGlobalSearch = {
     tracks: {

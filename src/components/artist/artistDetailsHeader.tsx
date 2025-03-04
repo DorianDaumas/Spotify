@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getImageGradient } from "../../utils/getBackgroundColor";
-import { RootArtistDetail } from "../../redux/slices/artist/artist.interface";
+import { RootArtistDetail } from "../../redux/interfaces/artist/artist.interface";
 import { Box, Card, CardActionArea, CardMedia, Typography } from "@mui/material";
 
 export const ArtistHeader = (props: RootArtistDetail) => {

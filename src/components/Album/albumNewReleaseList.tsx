@@ -6,33 +6,33 @@ import CardActionArea from '@mui/material/CardActionArea';
 import CardMedia from '@mui/material/CardMedia';
 import { Link } from 'react-router';
 import Tooltip from '@mui/material/Tooltip';
-import type { Item } from '../../redux/slices/album/albumNewReleases.interface';
+import type { Item } from '../../redux/interfaces/album/albumNewReleases.interface';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { BtnPlay } from '../player/btnPlay';
-import { useDispatch } from 'react-redux';
-import { setInfoBtn } from '../../redux/slices/player/playerInfoReadSong';
+// import { useDispatch } from 'react-redux';
+// import { setInfoBtn } from '../../redux/slices/player/playerInfoReadSong';
 
 
 export const AlbumNewReleasesList = (albumNewRelease: Item) => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const [hovered, setHovered] = useState({
         hovered: false,
         id: ''
     })
 
-   const songData = (albumNewRelease: Item) => {
-    const info = {
-        info: {
-            name: albumNewRelease.name,
-            uri: albumNewRelease.uri,
-            type: albumNewRelease.type,
-            id: albumNewRelease.id
-        }
-    }
-        dispatch(setInfoBtn(info))
-   }
+//    const songData = (albumNewRelease: Item) => {
+//     const info = {
+//         info: {
+//             name: albumNewRelease.name,
+//             uri: albumNewRelease.uri,
+//             type: albumNewRelease.type,
+//             id: albumNewRelease.id
+//         }
+//     }
+//         dispatch(setInfoBtn(info))
+//    }
     return (
             <Box>
                 <Card onMouseEnter={() => (setHovered({hovered: true, id: albumNewRelease?.id ?? ''}))} onMouseLeave={() => (setHovered({hovered: false, id: albumNewRelease?.id ?? ''}))} elevation={0} sx={{ minHeight: '200', width: 170 }}>
@@ -55,8 +55,8 @@ export const AlbumNewReleasesList = (albumNewRelease: Item) => {
                             >
                             {
                                 hovered.hovered && hovered.id === albumNewRelease.id ?
-                                <div onClick={() => songData(albumNewRelease)} style={{position: 'absolute', right: 0, top: '40%'}}>
-                                    <BtnPlay info={{type: albumNewRelease?.type ?? '' , uri: albumNewRelease?.uri ?? '', name: albumNewRelease.name}} ids={albumNewRelease.id} offset={0} uris={albumNewRelease?.uri ?? ''}/>
+                                <div style={{position: 'absolute', right: 0, top: '40%'}}>
+                                    <BtnPlay info={{context_uri: albumNewRelease.uri, uri: albumNewRelease.uri, name: albumNewRelease.name, type: "miniature"}}/>
                                 </div>
                                 : null 
                             }                                        

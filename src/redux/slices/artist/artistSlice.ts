@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { RootArtistDetail } from './artist.interface'
+import type { RootArtistDetail } from '../../interfaces/artist/artist.interface'
 
 const initialState: RootArtistDetail = {
     artists: [],

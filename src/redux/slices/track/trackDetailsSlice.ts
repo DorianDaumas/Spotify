@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RooTrackDetails } from './trackDetails.interface';
+import { RooTrackDetails } from '../../interfaces/track/trackDetails.interface';
 
 const initialState: RooTrackDetails = {
     trackDetails: {

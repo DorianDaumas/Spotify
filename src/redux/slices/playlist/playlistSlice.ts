@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { RootObject } from './playlist.interface'
+import type { RootObject } from '../../interfaces/playlist/playlist.interface'
 const initialState: RootObject = {
     playlistDetails: {
         collaborative: false,

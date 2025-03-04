@@ -25,7 +25,7 @@ export const AlbumDetails = () => {
     const [open, setOpen] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
 
-    const ids = data?.tracks.items.map((el) => el.id)
+    // const ids = data?.tracks.items.map((el) => el.id)
     
     useEffect(() => {
         if (data?.id && !isLoading) {
@@ -116,7 +116,7 @@ export const AlbumDetails = () => {
                 <AlbumHeader {...data} />
             </div>
             <div style={{margin: '0px 40px 0px 40px', display: 'flex', alignItems: 'center'}}>
-                <BtnPlay info={{type: data.type, uri: data.uri}} ids={ids} offset={0} uris={data.uri}/>
+                <BtnPlay info={{context_uri: data.uri, uri: data.uri, name: data.name, type: 'album'}}/>
                 <Tooltip title={alreadyInLibrary && alreadyInLibrary[0] ? "Supprimer de la Bibliothèque" : "Sauvegarder dans la Bibliothèque"} placement='right'>
                     {
                         alreadyInLibrary && alreadyInLibrary[0] ?
@@ -133,7 +133,7 @@ export const AlbumDetails = () => {
             </div>
             
             <div style={{margin: '10px 80px'}}>
-                <AlbumTracks allUris={data.uri} uri={data.uri} albumId={data.id}/>
+                <AlbumTracks uri={data.uri} albumId={data.id}/>
             </div>
             <br></br>
 

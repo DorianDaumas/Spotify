@@ -1,33 +1,15 @@
-import { Item } from '../../redux/slices/user/userSavedTracks.interface'
+import { Item } from '../../redux/interfaces/user/userSavedTracks.interface'
 import { TableRow, TableCell, TableBody, Typography } from '@mui/material'
 import { Link } from 'react-router'
 import { convertirDuree } from '../../utils/covertDuration'
 import { formatArtistIds } from '../../utils/formatArtistIds'
 import { afficherDuree } from '../../utils/convertTime'
-import { useDispatch } from 'react-redux'
-// import { RootState } from '../../redux/store'
 import { TableRowPlay } from '../player/tableRowPlay'
 import { useState } from 'react'
-import { setNewUris } from '../../redux/slices/player/playerSice'
 
-export const LibraryTracks = ({data, index}: {data: Item, index:number}) => {
-    // const currentTrack = useSelector((state: RootState) => state.playerTrackInfo.tracksInfo);
+export const LibraryTracks = ({data, index, uris}: {uris: string[], data: Item, index:number}) => {
     const [hoveredRow, setHoveredRow] = useState<number | null>(null);
-
-    const dispatch = useDispatch();
-
-    const listenSong = (offset: number) => {
-        const state = {
-            offset: offset,
-            info: {
-                type: 'track',
-                uri: data.track.uri
-            },
-            uris: data.track.uri
-        }        
-        dispatch(setNewUris(state))
-    }
-
+    
     return (
         <TableBody >
             <TableRow
@@ -36,8 +18,8 @@ export const LibraryTracks = ({data, index}: {data: Item, index:number}) => {
                 onMouseLeave={() => setHoveredRow(null)}     
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-            <TableCell onClick={() => listenSong(index)} align="left">
-                <TableRowPlay hoveredRow={hoveredRow} index={index} id={data?.track.id} />
+            <TableCell align="left">
+                <TableRowPlay hoveredRow={hoveredRow} uris={uris} type='user-liked-tracks' uri={data?.track.uri} index={index} id={data?.track.id} />
             </TableCell>
             <TableCell align="left">
                 <div style={{display: 'flex', alignItems: "center"}}>

@@ -1,7 +1,7 @@
 import { Box, Card, CardActionArea, CardMedia, CardContent, Typography, Tooltip, Stack, CircularProgress, TableBody, Table, TableContainer, Paper } from "@mui/material"
 import Grid from '@mui/material/Grid2';
 import { Link } from "react-router"
-import { Item2, Item3, Item4 } from "../../redux/slices/search/searchGlobal.interface"
+import { Item2, Item3, Item4 } from "../../redux/interfaces/search/searchGlobal.interface"
 import { useGetAlbumTracksQuery, useGetArtistTopTracksQuery, useGetPlaylistDetailsQuery } from "../../redux/services/spotifyApi";
 // import { convertirDuree } from "../../utils/covertDuration";
 // import { formatArtistIds } from "../../utils/formatArtistIds";

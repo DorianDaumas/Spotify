@@ -20,7 +20,7 @@ const initialState: RootDevice = {
 }
 
 export const playerDeviceSlice = createSlice({
-  name: 'playerPlay',
+  name: 'playerDevice',
   initialState,
   reducers: {
     getDevices: (state) => state,

@@ -12,14 +12,12 @@ import { UserRecommendedTracks } from '../components/user/userRecommendedTracks'
 
 export default function DashboardPage() {
     const imageUrl = useSelector((state: RootState) => state.hoveredImage.image);
-
     const [backgroundGradient, setBackgroundGradient] = useState<string>('linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(6, 255, 173, .5) 100%)');
     useEffect(() => {
       getImageGradient(imageUrl, (gradient) => {        
         setBackgroundGradient(gradient);
       });
     }, [imageUrl]);
-
     
     return <>
         <AnimatePresence mode="wait">

@@ -62,7 +62,7 @@ export const ArtistDetail = () => {
                 <ArtistHeader {...artistData} />
             </div>
             <div style={{margin: '40px 80px'}}>
-                <BtnPlay info={{type: artistData.artists[0].type, uri: artistData.artists[0].uri}} offset={0} uris={artistData.artists[0].uri}/>
+                <BtnPlay info={{context_uri: artistData.artists[0].uri, uri: artistData.artists[0].uri, name: artistData.artists[0].name, type: 'artist'}}/>
                 <ArtistDetailsTopTracks {...topTracksData} />
             </div>
             <div style={{margin: '40px 80px'}}>

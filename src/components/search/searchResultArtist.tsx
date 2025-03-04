@@ -1,32 +1,17 @@
 import { Box, Typography, Card, CardActionArea, CardMedia, CardContent, Tooltip } from "@mui/material"
 import { Link } from "react-router"
-import { Artists, Item2 } from "../../redux/slices/search/searchGlobal.interface"
+import { Artists } from "../../redux/interfaces/search/searchGlobal.interface"
 import { AnimatePresence, motion } from "framer-motion"
-import { setInfoBtn } from "../../redux/slices/player/playerInfoReadSong"
-import { useDispatch } from "react-redux"
 import { useState } from "react"
 import { BtnPlay } from "../player/btnPlay"
 
 export const SearchResultArtist = (artists: Artists) => {
-    const dispatch = useDispatch();
 
     const [hovered, setHovered] = useState({
         hovered: false,
         id: ''
     })
 
-   const songData = (artist: Item2) => {
-    const info = {
-        info: {
-            name: artist.name ?? '',
-            uri: artist.uri ?? '',
-            type: artist.type ?? '',
-            id: artist.id ?? ''
-        }
-    }
-        dispatch(setInfoBtn(info))
-   }
-   
   return (
   <>
     <Typography variant="h5" mb={2}>
@@ -57,8 +42,8 @@ export const SearchResultArtist = (artists: Artists) => {
                                 >
                             {
                                 hovered.hovered && hovered.id === artist.id ?
-                                <div onClick={() => songData(artist)} style={{position: 'absolute', right: 0, top: '40%'}}>
-                                    <BtnPlay info={{type: artist?.type ?? '' , uri: artist?.uri ?? '', name: artist.name}} ids={artist.id} offset={0} uris={artist?.uri ?? ''}/>
+                                <div style={{position: 'absolute', right: 0, top: '40%'}}>
+                                    <BtnPlay info={{context_uri: artist.uri ?? '', uri: artist.uri ?? '', name: artist.name ?? '', type: 'artist'}}/>
                                 </div>
                                 : null 
                             }                                        

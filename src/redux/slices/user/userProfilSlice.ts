@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootUserProfil, UserProfil } from './userProfil.interface';
+import { RootUserProfil, UserProfil } from '../../interfaces/user/userProfil.interface';
 export const initialState: RootUserProfil = {
     userProfil: {
         country: '',

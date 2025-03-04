@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { PopularArtists, RootSearchPopularArtists } from './searchPopularArtist.interface';
+import { PopularArtists, RootSearchPopularArtists } from '../../interfaces/search/searchPopularArtist.interface';
 
 const initialState: RootSearchPopularArtists = {
     artists: {

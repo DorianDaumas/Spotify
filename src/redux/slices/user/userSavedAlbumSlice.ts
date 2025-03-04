@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootUserSavedAlbums, UserSavedAlbums } from './userSavedAlbums.interface';
+import { RootUserSavedAlbums, UserSavedAlbums } from '../../interfaces/user/userSavedAlbums.interface';
 
 const initialState: RootUserSavedAlbums = {
     savedAlbums: {
