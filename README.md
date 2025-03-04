@@ -70,11 +70,13 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
   
 
 - #### Player
-  - Le player est une library tierce (https://github.com/gilbarbara/react-spotify-web-playback/tree/main). Je compte créer mon propre player celui-ci ne me convient pas mais sa sera sur une v2
-  - Ajout d'un button au player pour afficher une fille d'attente existant lorsque on écoutes quelque chose
-    - La fille d'attente affiche le morceaux qui est écouter actuellement
-    - Des suggestions d'autres morceaux via l'api de spotify
-    - Chaques suggestions est cliquables et permet de rediriger vers sa page correspondante
+  - Le player affiche la track qui est actuellement écouté, avec son image
+  - Un slider pour régler le volume
+  - Un button play/pause et un des buttons prev / next permetant de skip ou revenir a une précédente track
+  - Un button au player pour afficher une fille d'attente existant lorsque on écoutes quelque chose
+    - La fille d'attente affiche le morceaux qui est écouté actuellement
+    - la fille d'attente des prochains morceaux
+  - Un button qui permet de "shuffle" la fille d'attente
     ![Capture d'écran 2025-02-28 185422](https://github.com/user-attachments/assets/96a35c5f-29f6-4bb8-a5b6-98d50b59cbe9 =250x)
 
 
@@ -126,6 +128,6 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
     - Affiche un tableau avec les informations sur les titres de la playlist et la possibilité de choisir quel track écoutés.
 
 ## Choses à prévoir pour une v2
-  - Créer mon propre player
-  - Travailler plus le responsive
+  - Ajouter les test e2e et unitaire avec vitest
+  - Ameliorer le responsive
   - Améliorations diverses
