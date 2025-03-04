@@ -90,7 +90,7 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
     - la fille d'attente des prochains morceaux
   - Un button qui permet de "shuffle" la fille d'attente
 
-  <img src='https://github.com/user-attachments/assets/96a35c5f-29f6-4bb8-a5b6-98d50b59cbe9' height="250px">
+    <img src='https://github.com/user-attachments/assets/96a35c5f-29f6-4bb8-a5b6-98d50b59cbe9' height="250px">
     
 
 
