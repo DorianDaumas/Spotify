@@ -5,30 +5,13 @@ import { Link } from 'react-router';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { BtnPlay } from '../player/btnPlay';
-// import { useDispatch } from 'react-redux';
-// import { setInfoBtn } from '../../redux/slices/player/playerInfoReadSong';
-// import { Item } from '../../redux/slices/user/userTopArtist.interface';
 
 export const UserTopArtists = () => {
     const {data, isLoading, error } = useGetUserTopArtistQuery();
-    // const dispatch = useDispatch();
-
     const [hovered, setHovered] = useState({
         hovered: false,
         id: '',
     })
-
-    // const songData = (data: Item) => {
-    //     const info = {
-    //         info: {
-    //             name: data.name,
-    //             uri: data.uri,
-    //             type: data.type,
-    //             id: data.id
-    //         }
-    //     }
-    //     dispatch(setInfoBtn(info))
-    // }
 
     if (isLoading) return (
         <div style={{margin: '10px 40px 20px 40px'}}>
@@ -48,7 +31,7 @@ export const UserTopArtists = () => {
     if (error || !data) return null;
     
     return (<>
-        <div style={{margin: '10px 40px 20px 40px'}}>
+        <div style={{margin: '-20px 40px 20px 40px'}}>
             <div>
                 <Typography variant='subtitle1'>Top artistes du mois</Typography>
                 <Typography variant='body2' fontSize={12} color='#dedede'>Visibles uniquement par vous</Typography>

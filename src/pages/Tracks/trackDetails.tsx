@@ -109,7 +109,7 @@ export const TrackDetails = () => {
             </div>
             <div style={{margin: '0px 60px'}}>
             <div style={{margin: '0px 40px 0px 0px', display: 'flex', alignItems: 'center'}}>
-                <BtnPlay info={{context_uri: data.album.uri, uri: data.album.uri, name: data.album.name}}/>
+                <BtnPlay info={{context_uri: data.album.uri, uri: data.album.uri, offset: data.track_number, name: data.album.name}}/>
 
                 <Tooltip title={alreadyInLibrary && alreadyInLibrary[0] ? "Supprimer de la Bibliothèque" : "Sauvegarder dans la Bibliothèque"} placement='right'>
                     {

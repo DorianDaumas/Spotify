@@ -45,9 +45,8 @@ export const BtnPlay = (payload: Payload) => {
                 }
             }
         } else if (payload.info.type === 'user-liked-tracks') { 
-                const findUri = payload?.info?.uri?.find((el: string) => el === currentDataInfo?.track_window.current_track.uri)
-                
-                if (findUri) {
+            const findUri = Array.isArray(payload?.info?.uri) ? payload?.info?.uri?.find((el: string) => el === currentDataInfo?.track_window.current_track.uri) : payload?.info?.uri
+            if (findUri) {
                     state = {
                         data: {
                             uris: payload.info.uri,
@@ -70,9 +69,7 @@ export const BtnPlay = (payload: Payload) => {
                         device_id: deviceIdValue
                     }
                 }              
-        } else if (payload.info.type === 'album') {
-            console.log('zfzef');
-            
+        } else if (payload.info.type === 'album') {            
             if (payload.info.context_uri === currentDataInfo?.context.uri && currentDataInfo?.track_window.current_track.album.uri === currentDataInfo?.context.uri) {                                
                 state = {
                     data: {
@@ -129,7 +126,7 @@ export const BtnPlay = (payload: Payload) => {
     }
 
     if (payload?.info.type === 'user-liked-tracks') {
-        const findUri = payload?.info?.uri?.find((el: string) => el === currentDataInfo?.track_window.current_track.uri)
+        const findUri = Array.isArray(payload?.info?.uri) ? payload?.info?.uri?.find((el: string) => el === currentDataInfo?.track_window.current_track.uri) : payload?.info?.uri
         return (
             <div>
                 <IconButton color="success">

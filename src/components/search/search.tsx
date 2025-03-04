@@ -4,13 +4,12 @@ import { useNavigate, useLocation, Link } from "react-router";
 import { RootState, useAppDispatch, useAppSelector } from "../../redux/store";
 import { searchQuery } from "../../redux/slices/search/searchQuerySlice";
 import ClearIcon from '@mui/icons-material/Clear';
-import { FormControl, IconButton, MenuItem, Select, Typography } from "@mui/material";
+import { IconButton } from "@mui/material";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
 export const Search = () => {
   const { query } = useAppSelector((state: RootState) => state.searchQuery);
   const [search, setSearch] = useState('');
-  const [searchType, setSearchType] = useState('artist');
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useAppDispatch();
@@ -56,21 +55,6 @@ export const Search = () => {
             onChange={(e) => handleSearch(e.target.value)}
             placeholder="Rechercher une chanson, un artiste..."
             InputProps={{
-              startAdornment: (
-                <FormControl size="small" variant="standard" sx={{ minWidth: 90, marginRight: 1 }}>
-                    <Select
-                      size="small"
-                      id="search-type"
-                      value={searchType}
-                      onChange={(e) => setSearchType(e.target.value)}
-                    >
-                      <MenuItem value="artist"><Typography variant="body1">Artiste</Typography></MenuItem>
-                      <MenuItem value="album">Album</MenuItem>
-                      <MenuItem value="playlist">Playlist</MenuItem>
-                      <MenuItem value="track">Track</MenuItem>
-                    </Select>
-                </FormControl>
-              ),
               endAdornment: (
                 <IconButton onClick={clearSearch}>
                 <ClearIcon sx={{ color: 'text.secondary', mr: 1 }} />

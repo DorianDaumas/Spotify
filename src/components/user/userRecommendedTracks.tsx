@@ -51,7 +51,7 @@ export const UserRecommendedTracks = () => {
             transitionProperty: 'background',
             transitionTimingFunction: 'ease',
         }}>
-            <div style={{padding: '35px'}}>
+            <div style={{padding: '35px', paddingBottom: 100}}>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container justifyContent={'space-between'} spacing={{ xs: 2, md: 3 }} columns={{ xs: 1, sm: 6, md: 12, xl: 12 }}>
                     {dataTopTracks?.items.map((data, index) => (

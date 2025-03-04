@@ -76,7 +76,7 @@ export const TableRowPlay = ({ hoveredRow, index, id, uri, type, uris }: { type?
             startPlayback(state)
           }
         }
-    }
+    }   
     
     const HoveringItem = ({ id }: { id: string }) => {
         return (

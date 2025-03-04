@@ -30,6 +30,7 @@ export default function Layout() {
   const [currentIndex, setCurrentIndex] = useState(-1);
   const { data, isLoading, error } = useGetUserProfilQuery()
   
+  
 
   useEffect(() => {
     if (`${location.pathname}${location.search}` !== history[currentIndex]) {      
@@ -275,6 +276,16 @@ export default function Layout() {
     setDataFromChild(data);
   };
 
+  const scrollToTop = () => {
+    const contentElement = document.querySelector('#container-app-page');
+    if (contentElement) {
+      contentElement.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  };
+  
   return (
     <DashboardLayout 
       hideNavigation
@@ -315,6 +326,7 @@ export default function Layout() {
 
         <Box 
           component={motion.div}
+          id='container-app-page'
           sx={{ 
             flexGrow: 1,
             ml: `${open ? 370 : 92}px`,
@@ -337,6 +349,7 @@ export default function Layout() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.2 }}
+              onAnimationComplete={() => scrollToTop()}
             >
               <Outlet />
               <Footer />
