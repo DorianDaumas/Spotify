@@ -2,7 +2,7 @@
 
 Ce projet à pour but de faire un clone de Spotify pour tester le Framework React et son écosystème (Redux RTK) avec typescript.
 J'ai éssayé de respecter les bonnes pratiques avec un typage fort via Typescript, des tests avec vitest et une architecture clair et lisible. 
-## (Le projet n'est pas fini et en cours de progression, il reste des choses a améliorés)
+## (Le projet n'est pas fini et en cours de progression, il reste des choses a améliorées)
 
 Pour que le projet fonctionne en local, il faudra créer une "application" via le Dashboard de spotify pour pouvoir récuperer les différentes informations nécessaires :
 
@@ -11,7 +11,7 @@ Pour que le projet fonctionne en local, il faudra créer une "application" via l
 une fois les étapes suivantes et vos informations récupéré, vous pouvez créer un fichier .env pour y mettre le client_id, la redirect_uri etc
 (exemple d'utilisation dans le fichier dashboard.tsx)
 
-Spotify utilise des scopes pour pouvoir avoir utiliser leur api, les scopes sont nécessaires pour faire fonctionner le projet.
+Spotify utilise des scopes pour pouvoir utiliser leur api, les scopes sont nécessaires pour faire fonctionner le projet.
 Plus d'info -> https://developer.spotify.com/documentation/web-api/concepts/scopes
 
 
