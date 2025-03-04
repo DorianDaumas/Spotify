@@ -4,7 +4,9 @@ Ce projet à pour but de faire un clone de Spotify pour tester le Framework Reac
 J'ai éssayé de respecter les bonnes pratiques avec un typage fort via Typescript, des tests avec vitest et une architecture clair et lisible. 
 ## (Le projet n'est pas fini et en cours de progression, il reste des choses a améliorées)
 
-Pour que le projet fonctionne en local, il faudra créer une "application" via le Dashboard de spotify pour pouvoir récuperer les différentes informations nécessaires :
+Pour que le projet fonctionne en local :
+- npm install
+- il faudra créer une "application" via le Dashboard de spotify pour pouvoir récuperer les différentes informations nécessaires :
 
 #### https://developer.spotify.com/documentation/web-api/tutorials/getting-started ####
 
