@@ -30,8 +30,6 @@ export const ArtistPopular = () => {
   return (
     <>
       <div className='full-width'>
-        <br></br>
-        <br></br>
         <div className='full-width'>
           <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
             <Typography variant='subtitle1' textAlign={'left'} ml={0}>Artistes populaires 🎵</Typography>

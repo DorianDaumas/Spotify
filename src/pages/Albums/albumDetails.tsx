@@ -10,12 +10,14 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRefreshComponent } from '../../redux/slices/refreshComponentSlice';
 import { RootState } from '../../redux/store';
+import { useSearchParams } from 'react-router';
 
 export const AlbumDetails = () => {
     const dispatch = useDispatch()
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const albumId = urlParams.get('id') ?? '';
+    const [searchParams] = useSearchParams();
     const [albumIdToCheck, setAlbumIdToCheck] = useState('');
     const { data, isLoading, error } = useGetAlbumsDetailsQuery(albumId)
     const [checkIsSavedAlbum, { data: alreadyInLibrary }] = useLazyCheckIsSavedAlbumQuery()
@@ -25,8 +27,16 @@ export const AlbumDetails = () => {
     const [open, setOpen] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
 
-    // const ids = data?.tracks.items.map((el) => el.id)
-    
+    useEffect(() => {
+        const contentElement = document.querySelector('#container-app-page');
+        if (contentElement) {
+            contentElement.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+            });
+        }
+      }, [location.search, searchParams]);
+
     useEffect(() => {
         if (data?.id && !isLoading) {
             setAlbumIdToCheck(data.id);
