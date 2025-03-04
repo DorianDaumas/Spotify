@@ -2,7 +2,18 @@
 
 Ce projet à pour but de faire un clone de Spotify pour tester le Framework React et son écosystème (Redux RTK) avec typescript.
 J'ai éssayé de respecter les bonnes pratiques avec un typage fort via Typescript, des tests avec vitest et une architecture clair et lisible. 
-## (Le projet n'est pas fini et donc en cours de progression, il reste des choses a améliorés)
+## (Le projet n'est pas fini et en cours de progression, il reste des choses a améliorés)
+
+Pour que le projet fonctionne en local, il faudra créer une "application" via le Dashboard de spotify pour pouvoir récuperer les différentes informations nécessaires :
+
+#### https://developer.spotify.com/documentation/web-api/tutorials/getting-started ####
+
+une fois les étapes suivantes et vos informations récupéré, vous pouvez créer un fichier .env pour y mettre le client_id, la redirect_uri etc
+(exemple d'utilisation dans le fichier dashboard.tsx)
+
+Spotify utilise des scopes pour pouvoir avoir utiliser leur api, les scopes sont nécessaires pour faire fonctionner le projet.
+Plus d'info -> https://developer.spotify.com/documentation/web-api/concepts/scopes
+
 
 # IMPORTANT
 Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abonnement premium, ce qui signifie que sans abonnement on ne peux plus écouter de musique... Les autres fonctionnalitées marchent cependant sans abonnement premium (Recherche, affichages des playlists / Artistes / Albums etc... Seulement le l'écoute n'est pas possible)
@@ -57,16 +68,17 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
   -  Possibilité d'écouter dirrectement les artistes, albums, tracks ou playlist via un hover sur ces derniers
   -  Pouvoir cliquer sur les images ou nom d'artistes, albums, playlists, tracks pour se rendre dirrectement sur leur pages correspondantes.
   -  Afficher une page dédié contenant l'entiereté des differentes section au click sur les lien "Tout afficher" à droite des sections.
-  ![Capture d’écran 2025-02-28 185923](https://github.com/user-attachments/assets/e808d3e5-d3c5-4c26-b7c8-7cbd12549663=250x)
-
-    
+ 
+    <img src='https://github.com/user-attachments/assets/e808d3e5-d3c5-4c26-b7c8-7cbd12549663' height="250px">
 
 - #### Sidebar Bibliothèque
   - Menu dépliant qui permet d'afficher les albums, playlist et tracks likés par l'user. L'état du menu est fermé de base, quand le menu est fermé on vois seulement les images des différents item likés.
     Dans l'état ouvert on y vois aussi les noms et le type
   - Un mini filtre qui permet d'afficher soit uniquement les albums, soit les playlist liké par l'user ( par défaut tout est affichés )
   - Au click sur un item il redirige directement sur sa page correspondante.
-  ![Capture d’écran 2025-02-28 185716](https://github.com/user-attachments/assets/3e8e4666-bec7-4a7e-ac77-c3a16c2772f1 =250x)
+    
+    <img src='https://github.com/user-attachments/assets/3e8e4666-bec7-4a7e-ac77-c3a16c2772f1' height="250px">
+
   
 
 - #### Player
