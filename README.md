@@ -4,7 +4,9 @@ Ce projet à pour but de faire un clone de Spotify pour tester le Framework Reac
 J'ai éssayé de respecter les bonnes pratiques avec un typage fort via Typescript, des tests avec vitest et une architecture clair et lisible. 
 ## (Le projet n'est pas fini et en cours de progression, il reste des choses a améliorées)
 
-Pour que le projet fonctionne en local, il faudra créer une "application" via le Dashboard de spotify pour pouvoir récuperer les différentes informations nécessaires :
+Pour que le projet fonctionne en local :
+- npm install
+- il faudra créer une "application" via le Dashboard de spotify pour pouvoir récuperer les différentes informations nécessaires :
 
 #### https://developer.spotify.com/documentation/web-api/tutorials/getting-started ####
 
@@ -44,8 +46,8 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
     - 2 Une sidebar à gauche "Bibliothèque" qui affiche les albums / playlists / titres likées par l'user avec possibilité de pouvoir plier / déplier celle-ci pour avoir plus d'info et un mini filtre une fois déplier.
     - 3 Un footer qui contient le player (à noter qu'il y a un 2eme Footer contenant les infos de spotify comme les liens utiles, réseaux sociaux etc inclus dans chaque page de l'application en bas comme sur spotify original).
     - 4 La Page à affichée
-
-
+   
+      
 ## Fonctionnalitées
 
 ### Connexion & Auth & route
@@ -90,7 +92,7 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
     - la fille d'attente des prochains morceaux
   - Un button qui permet de "shuffle" la fille d'attente
 
-  <img src='https://github.com/user-attachments/assets/96a35c5f-29f6-4bb8-a5b6-98d50b59cbe9' height="250px">
+    <img src='https://github.com/user-attachments/assets/96a35c5f-29f6-4bb8-a5b6-98d50b59cbe9' height="250px">
     
 
 
@@ -146,4 +148,4 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
   - Pouvoir créer une playlist perso
   - s'abonner à d'autres utilisateurs
   - Ameliorer le responsive
-  - Améliorations diverses
+  - Amelioration diverse et meileur responsive
