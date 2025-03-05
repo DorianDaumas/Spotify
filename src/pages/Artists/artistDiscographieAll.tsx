@@ -29,9 +29,6 @@ export const ArtistDiscographieAll = () => {
         </div>
     );
     if (!discographieData) return null;
-
-    // const allUris = [...discographieData.items.map((el) => el.uri)] 
-    console.log();
     
     return (
         <div style={{margin: 40}}>

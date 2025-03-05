@@ -106,11 +106,9 @@ export const AlbumDetails = () => {
         }        
         if (alreadyInLibrary && alreadyInLibrary[0]) {
             deleteAlbums(state)
-            console.log('to delete');
             
         } else {
             saveAlbums(state)
-            console.log('to save');
 
         }
         checkIsSavedAlbum(albumIdToCheck)

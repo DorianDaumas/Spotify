@@ -55,6 +55,7 @@ export default function Layout() {
 
   const logout = () => {
     dispatch(clearToken());
+    window.localStorage.removeItem("device_id")
     navigate("/");
   }
 

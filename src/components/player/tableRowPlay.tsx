@@ -1,13 +1,15 @@
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import animationPlayer from '../../assets/animationPlayer.gif';
-import { usePausePlaybackMutation, useStartPlaybackMutation } from '../../redux/services/spotifyApi';
+import { useGetUserProfilQuery, usePausePlaybackMutation, useStartPlaybackMutation } from '../../redux/services/spotifyApi';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
+import Tooltip from '@mui/material/Tooltip';
 
 export const TableRowPlay = ({ hoveredRow, index, id, uri, type, uris }: { type?: string, uris?: string[], uri: string, hoveredRow: number | null, index: number, id: string, }) => {
 
     const currentDataInfo = useSelector((state: RootState) => state.playerInfoReadSong);
+    const {data: userInfo} = useGetUserProfilQuery()
 
     const [startPlayback] = useStartPlaybackMutation();
     const [pausePlayback] = usePausePlaybackMutation();
@@ -117,6 +119,14 @@ export const TableRowPlay = ({ hoveredRow, index, id, uri, type, uris }: { type?
               }
             </div>
         );
+      }
+
+      if (userInfo?.product === 'free') {
+        return (
+            <Tooltip title='Vous devez avoir un compte premium pour écouter de la musique'>
+                <PlayArrowIcon color='disabled'  />   
+            </Tooltip>
+        )
       }
     
       if (type === 'playlist') {

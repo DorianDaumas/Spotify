@@ -42,6 +42,7 @@ interface Linkedfrom {
 export interface InfoBtn {
     context: { uri: string | null, metadata: object | null },
     position: number,
+    updateTime: number,
     duration: number,
     paused: boolean,
     track_window: { current_track: Track, next_tracks: Track[], previous_tracks: Track[] }
@@ -51,6 +52,7 @@ export interface InfoBtn {
 const initialState: InfoBtn = {
   context: { uri: "", metadata: {} },
   position: 0,
+  updateTime: 0,
   paused: false,
   duration: 0,
   track_window: {
@@ -95,6 +97,7 @@ export const playerInfoReadSongSlice = createSlice({
       state.position = action.payload.position;
       state.paused = action.payload.paused;
       state.duration = action.payload.duration;
+      state.updateTime = action.payload.updateTime;
       state.track_window = action.payload.track_window;            
     },
     getInfo: (state) => state,

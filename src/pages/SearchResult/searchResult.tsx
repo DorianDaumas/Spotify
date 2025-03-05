@@ -31,8 +31,6 @@ export const SearchResult = () => {
     const { data, isLoading, error } = useGetGlobalSearchQuery(shouldFetch ? searchQuery || searchQueryFromUrl : '', {
         skip: !shouldFetch,
     });
-
-    console.log(data);
     
 
     if (isLoading) return (

@@ -283,7 +283,7 @@ interface state {
 export const playerData = createApi({
   reducerPath: 'playerData',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['shuffleQueue', 'getDevice', 'getPlayerState', 'startPlayback', 'resumePlayback', 'playerQueue', 'pausePlayback', 'currentTrack', 'nextTrackPlayback', 'prevTrackPlayback', 'volumePlayback'],
+  tagTypes: ['shuffleQueue', 'getDevice', 'getPlayerState', 'startPlayback', 'resumePlayback', 'seekPositionPlayback', 'playerQueue', 'repeatMode', 'pausePlayback', 'currentTrack', 'nextTrackPlayback', 'prevTrackPlayback', 'volumePlayback'],
   endpoints: (builder) => ({
     getdevice: builder.query<RootDevice , void>({
       query: () => `me/player/devices`,
@@ -337,6 +337,13 @@ export const playerData = createApi({
         providesTags: ['volumePlayback'],
       }),
     }),
+    seekPositionPlayback: builder.mutation<string, { device_id: string, timerTrack: number }>({
+      query: ({ device_id, timerTrack }) => ({
+        url: `me/player/seek?device_id=${device_id}&position_ms=${timerTrack}`,
+        method: 'PUT',
+        providesTags: ['seekPositionPlayback'],
+      }),
+    }),
     getPlayerQueue: builder.query<RootQueue , void>({
       query: () => `me/player/queue`,
       providesTags: ['playerQueue'],
@@ -351,6 +358,13 @@ export const playerData = createApi({
         method: 'PUT',
       }),
       providesTags: ['shuffleQueue'],
+    }),
+    repeatMode: builder.query<string, { device_id: string, repeat: string }>({
+      query: ({device_id, repeat}) => ({
+        url: `me/player/repeat?state=${repeat}&device_id=${device_id}`,
+        method: 'PUT',
+      }),
+      providesTags: ['repeatMode'],
     }),
   }),
 })
@@ -383,7 +397,10 @@ export const { useShuffleQueueQuery,
   useGetCurrentPlayingTrackQuery,
   useNextTrackPlaybackMutation,
   usePrevTrackPlaybackMutation,
-  useVolumePlaybackMutation } = playerData
+  useVolumePlaybackMutation,
+  useSeekPositionPlaybackMutation,
+  useRepeatModeQuery
+} = playerData
 export const { useGetTrackLyricsQuery } = tracksLyrics
 export const { useGetTrackDetailsQuery } = tracksInfo
 export const { useGetPlaylistDetailsQuery } = fetchPlaylist

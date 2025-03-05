@@ -7,7 +7,7 @@ import { getToken, callRefreshToken } from './services/auth';
 import { searchQuerySlice } from './slices/search/searchQuerySlice';
 import { playerSlice } from './slices/player/playerSice';
 import { playerTrackInfoSlice } from './slices/player/playerTracksInfoSlice';
-import {playerPlayEvent} from './slices/player/playerPlaySlice';
+import {playerReady} from './slices/player/playerReady';
 import { playerQueueSlice } from './slices/player/playerQueueSlice';
 import { playerDeviceSlice } from './slices/player/playerShuffleSlice';
 import { getImageHoveredSlice } from './slices/others/getImageHoveredSlice';
@@ -22,7 +22,7 @@ export const store = configureStore({
         playerInfoReadSong: playerInfoReadSongSlice.reducer,
         hoveredImage: getImageHoveredSlice.reducer,
         player: playerSlice.reducer,
-        playerPlay: playerPlayEvent.reducer,
+        playerReady: playerReady.reducer,
         playerTrackInfo: playerTrackInfoSlice.reducer,
         playerQueue: playerQueueSlice.reducer,
         playerShuffle: playerDeviceSlice.reducer,
