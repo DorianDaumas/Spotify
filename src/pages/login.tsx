@@ -2,7 +2,6 @@ import Card from "@mui/material/Card"
 import CardActionArea from "@mui/material/CardActionArea"
 import CardActions from "@mui/material/CardActions"
 import CardMedia from "@mui/material/CardMedia"
-import img from '../assets/charts_square_400x400.gif'
 import Grid from "@mui/material/Grid2"
 import Box from "@mui/material/Box"
 import { useDispatch } from "react-redux"
@@ -47,28 +46,23 @@ export const Login = () => {
     }
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2} alignItems="center" justifyContent="center">
-                <Grid size={6}>
-                    <div className="mask-image">
-                        <img src={img}/>
-                    </div>
+        <div>
+            <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2} alignItems="center" justifyContent="center">
+                    <Card sx={{ maxWidth: 345, margin: 'auto' }}>
+                        <CardActionArea>
+                            <CardMedia
+                                component="img"
+                                height="140"
+                                image="https://miro.medium.com/v2/resize:fit:1400/1*xlsvfw090Y_ONaPnXJmsTA.png"
+                            />
+                        </CardActionArea>
+                        <CardActions>
+                            <button onClick={handleLogin}>Login to Spotify</button>
+                        </CardActions>
+                    </Card>
                 </Grid>
-                <Grid size={6}>
-                <Card sx={{ maxWidth: 345 }}>
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="140"
-                            image="https://miro.medium.com/v2/resize:fit:1400/1*xlsvfw090Y_ONaPnXJmsTA.png"
-                        />
-                    </CardActionArea>
-                    <CardActions>
-                    <button onClick={handleLogin}>Login to Spotify</button>
-                    </CardActions>
-                </Card>
-                </Grid>
-            </Grid>
-        </Box>
+            </Box>
+        </div>
     )
 }

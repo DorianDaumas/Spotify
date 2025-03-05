@@ -1,7 +1,8 @@
 import { IconButton } from '@mui/material';
+import Tooltip from '@mui/material/Tooltip';
 import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
 import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
-import { usePausePlaybackMutation, useStartPlaybackMutation } from '../../redux/services/spotifyApi';
+import { useGetUserProfilQuery, usePausePlaybackMutation, useStartPlaybackMutation } from '../../redux/services/spotifyApi';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 
@@ -17,6 +18,7 @@ export interface Payload {
 }
 export const BtnPlay = (payload: Payload) => {
     const currentDataInfo = useSelector((state: RootState) => state.playerInfoReadSong);
+    const {data: userInfo} = useGetUserProfilQuery()
 
     const [startPlayback] = useStartPlaybackMutation();
     const [pausePlayback] = usePausePlaybackMutation();
@@ -73,11 +75,7 @@ export const BtnPlay = (payload: Payload) => {
             if (payload.info.context_uri === currentDataInfo?.context.uri && currentDataInfo?.track_window.current_track.album.uri === currentDataInfo?.context.uri) {                                
                 state = {
                     data: {
-                        // context_uri: currentDataInfo?.context.uri,
                         position_ms: currentDataInfo?.position,
-                        // offset: {
-                        //     uri: currentDataInfo?.track_window.current_track.uri,
-                        // }
                     },
                     device_id: deviceIdValue
                 }    
@@ -97,11 +95,7 @@ export const BtnPlay = (payload: Payload) => {
             if (payload.info.context_uri === currentDataInfo?.context.uri) {                                
                 state = {
                     data: {
-                        // context_uri: currentDataInfo?.context.uri,
                         position_ms: currentDataInfo?.position,
-                        // offset: {
-                        //     uri: currentDataInfo?.track_window.current_track.uri,
-                        // }
                     },
                     device_id: deviceIdValue
                 }    
@@ -123,6 +117,14 @@ export const BtnPlay = (payload: Payload) => {
     const pause = () => {
         const data = { device_id: deviceIdValue }
         pausePlayback(data)
+    }
+
+    if (userInfo?.product === 'free') {
+        return (
+            <Tooltip title='Vous devez avoir un compte premium pour écouter de la musique'>
+                <PlayCircleFilledWhiteIcon color='disabled' sx={{fontSize: 60}} />   
+            </Tooltip>
+        )
     }
 
     if (payload?.info.type === 'user-liked-tracks') {
