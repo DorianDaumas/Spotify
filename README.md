@@ -93,7 +93,12 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
     - La fille d'attente affiche le morceaux qui est écouté actuellement et les prochaines tracks
   - Un button pour afficher les parole de la chanson si c'est disponible via l'api
   ( un témoin lumineux vert est affiché si les fonctionnalitées son disponible )
-    <img src='https://github.com/user-attachments/assets/493aabfc-2408-424a-aa80-0cf4ad8775ba' height="250px">
+
+  <div style={display: flex}>
+        <img src='https://github.com/user-attachments/assets/493aabfc-2408-424a-aa80-0cf4ad8775ba' height="250px">
+    <img src='https://github.com/user-attachments/assets/0320c590-dd53-4e21-9481-afd0480b8016' height="250px">
+
+  </div>
     
 
 - #### Pages Profil
