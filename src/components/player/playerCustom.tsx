@@ -96,6 +96,10 @@ export const PlayerCustom = ({ toggleDrawer, drawer }: {drawer: boolean, toggleD
     }, [isPlaying, currentDataInfo, getPlayerQueue]);
 
     useEffect(() => {
+        getStatePosition()
+    }, [playbackState]);
+
+    useEffect(() => {
         setIsPlaying(!currentDataInfo?.paused);
     }, [currentDataInfo?.paused]);
 
