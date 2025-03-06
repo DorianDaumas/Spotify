@@ -42,11 +42,11 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
   
 - #### Structure
   - L'application est en 4 parties principales :
-    - 1 Un Header avec un historique de navigation, une search bar, et avatar avec la photo de profil de l'user et la possibilité d'aller sur son profil et/ou de se logout.
-    - 2 Une sidebar à gauche "Bibliothèque" qui affiche les albums / playlists / titres likées par l'user avec possibilité de pouvoir plier / déplier celle-ci pour avoir plus d'info et un mini filtre une fois déplier.
-    - 3 Un footer qui contient le player (à noter qu'il y a un 2eme Footer contenant les infos de spotify comme les liens utiles, réseaux sociaux etc inclus dans chaque page de l'application en bas comme sur spotify original).
-    - 4 La Page à affichée
-   
+    - 1 (orange) Un Header avec un historique de navigation, une search bar, et avatar avec la photo de profil de l'user et la possibilité d'aller sur son profil et/ou de se logout.
+    - 2 (bleue) Une sidebar à gauche "Bibliothèque" qui affiche les albums / playlists / titres likées par l'user avec possibilité de pouvoir plier / déplier celle-ci pour avoir plus d'info et un mini filtre une fois déplier.
+    - 3 (violet) Un footer qui contient le player (à noter qu'il y a un 2eme Footer contenant les infos de spotify comme les liens utiles, réseaux sociaux etc inclus dans chaque page de l'application en bas comme sur spotify original).
+    - 4 (vert) La Page à affichée
+    <img src='https://github.com/user-attachments/assets/28993007-147c-42d4-bb61-408c03de0861' height="250px">
       
 ## Fonctionnalitées
 
@@ -57,6 +57,7 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
 - Les routes sont protégées via le router (si pas connecté -> redirect vers la route /Login)
 - Reload automatiquement la page quand le Token expire pour refresh le Token (le Token a une durée de 1H) et relance les endpoints qui ont était affecté par l'expiration du token
 - Simple deconnexion en faisant un clear des token et redirect vers la page /Login
+    <img src='https://github.com/user-attachments/assets/c6e6a6a3-860d-482c-b21a-0b7e3cd19b0d' height="250px">
 
 
 ### Fonctionnalitées
@@ -70,47 +71,50 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
   -  Possibilité d'écouter dirrectement les artistes, albums, tracks ou playlist via un hover sur ces derniers
   -  Pouvoir cliquer sur les images ou nom d'artistes, albums, playlists, tracks pour se rendre dirrectement sur leur pages correspondantes.
   -  Afficher une page dédié contenant l'entiereté des differentes section au click sur les lien "Tout afficher" à droite des sections.
- 
     <img src='https://github.com/user-attachments/assets/e808d3e5-d3c5-4c26-b7c8-7cbd12549663' height="250px">
+
 
 - #### Sidebar Bibliothèque
   - Menu dépliant qui permet d'afficher les albums, playlist et tracks likés par l'user. L'état du menu est fermé de base, quand le menu est fermé on vois seulement les images des différents item likés.
     Dans l'état ouvert on y vois aussi les noms et le type
   - Un mini filtre qui permet d'afficher soit uniquement les albums, soit les playlist liké par l'user ( par défaut tout est affichés )
-  - Au click sur un item il redirige directement sur sa page correspondante.
-    
+  - Au click sur un item il redirige directement sur sa page correspondante.    
     <img src='https://github.com/user-attachments/assets/3e8e4666-bec7-4a7e-ac77-c3a16c2772f1' height="250px">
-
-  
+    
 
 - #### Player
   - Le player affiche la track qui est actuellement écouté, avec son image
   - Un slider pour régler le volume
-  - Un button play/pause et un des buttons prev / next permetant de skip ou revenir a une précédente track
-  - Un button au player pour afficher une fille d'attente existant lorsque on écoutes quelque chose
-    - La fille d'attente affiche le morceaux qui est écouté actuellement
-    - la fille d'attente des prochains morceaux
+  - Un slider pour afficher la timing de la track et pouvoir le changer en slidant
   - Un button qui permet de "shuffle" la fille d'attente
-
-    <img src='https://github.com/user-attachments/assets/96a35c5f-29f6-4bb8-a5b6-98d50b59cbe9' height="250px">
+  - Un button play/pause et des buttons prev / next permetant de skip ou revenir a une précédente track
+  - Un button repeat
+  - Un button pour afficher une fille d'attente existant lorsque on écoutes quelque chose
+    - La fille d'attente affiche le morceaux qui est écouté actuellement et les prochaines tracks
+  - Un button pour afficher les parole de la chanson si c'est disponible via l'api
+  ( un témoin lumineux vert est affiché si les fonctionnalitées son disponible )
+    <img src='https://github.com/user-attachments/assets/493aabfc-2408-424a-aa80-0cf4ad8775ba' height="250px">
     
-
 
 - #### Pages Profil
   - Affiche la page profil de l'user
     - Affiche le header avec les info de l'user
     - Affiche une section sur les artistes les plus écoutées de l'user
     - Affiche une section sur les playlist de l'user
+    <img src='https://github.com/user-attachments/assets/c57f5ca6-f62b-4387-ac97-5dca8976a69a' height="250px">
+    
 
 - #### Recherche
   - La recherche se lance quand l'user écrit quelque chose (avec un délai de .5s lorsque l'user termine d'ecrire pour eviter les surcharge d'appels api)
   - Le meilleur résultat de la recherche s'affiche avec :
-    - L'artistes, la plyalist ou l'album qui corresponds
-    - Les tracks les plus populaires qui correspondent
+    - L'artist, la playlist ou l'album qui corresponds
+    - Ces tracks les plus populaires
     - Une suggestions d'artistes
     - Une suggestions d'albums
     - Une suggestions de playlists
    (chaques elements est cliquable est permet la redirection vers la page qui lui correspond ou l'écoute direct au hover)
+    <img src='https://github.com/user-attachments/assets/a8c3cf4e-182b-448e-8728-2eee1f592a24' height="250px">
+
 
 - #### Pages Artistes
   - Affiche la page de l'artiste
@@ -118,14 +122,17 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
     - Affiches les tracks les plus populaires
     - Affiche la discographie de l'artiste avec des filtres ( Albums / single EP & Playlists / Compilation )
    (chaques elements est cliquable est permet la redirection vers la page qui lui correspond ou l'écoute direct au hover)
-    
+    <img src='https://github.com/user-attachments/assets/5339276d-4041-453a-b16f-5780dde0f4e1' height="250px">
 
+    
 - #### Pages Albums
   - Affiche la page de l'album
     - Affiche le header avec les info sur l'album
     - un button permetant d'ecouter l'album
     - un deuxieme button permettant de sauvgarder ou supprimer l'album dans sa Bibliothèque ( Sidebar Bibliothèque )
     - Affiche un tableau avec les informations sur les titres de l'albums et la possibilité de choisir quel track écoutés.
+    <img src='https://github.com/user-attachments/assets/b9c67eb2-b6f5-49a3-a352-820bffd2dfe1' height="250px">
+
 
 - #### Pages Tracks
   - Affiche la page de la Track
@@ -135,6 +142,8 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
     - Affiches les Lyrics correspondant ( si l'api les trouvents ).
     - Affiches le ou les artistes qui on contribué a la track.
     - Affiches les titres similaires
+    <img src='https://github.com/user-attachments/assets/8985f8f9-cdb6-41a6-a531-6b5eefd846df' height="250px">
+
 
 - #### Pages Playlists
   - Affiche la page de la playlist
@@ -142,7 +151,9 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
     - un button permetant d'ecouter la playlist
     - un deuxieme button permettant de sauvgarder ou supprimer la playlist dans sa Bibliothèque ( Sidebar Bibliothèque )
     - Affiche un tableau avec les informations sur les titres de la playlist et la possibilité de choisir quel track écoutés.
+    <img src='https://github.com/user-attachments/assets/6245a7b2-51e0-48ed-9a79-830da12cbed1' height="250px">
 
+    
 ## Choses à prévoir pour une v2
   - Ajouter les test e2e et unitaire avec vitest
   - Pouvoir créer une playlist perso
