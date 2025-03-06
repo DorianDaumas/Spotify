@@ -52,7 +52,7 @@ export const ArtistDiscographieAll = () => {
                                 </div>
                             </div>
                         </div>
-                        <AlbumTracks uri={album.uri} albumId={album.id} />
+                        <AlbumTracks uri={album.uri} context={album.uri} albumId={album.id} />
                         <br></br>
                         <br></br>
                         <br></br>

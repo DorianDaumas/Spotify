@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import Tooltip from '@mui/material/Tooltip';
 
-export const TableRowPlay = ({ hoveredRow, index, id, uri, type, uris }: { type?: string, uris?: string[], uri: string, hoveredRow: number | null, index: number, id: string, }) => {
+export const TableRowPlay = ({ hoveredRow, index, context, id, uri, type, uris }: { context?: string, type?: string, uris?: string[], uri: string, hoveredRow: number | null, index: number, id: string, }) => {
 
     const currentDataInfo = useSelector((state: RootState) => state.playerInfoReadSong);
     const {data: userInfo} = useGetUserProfilQuery()
@@ -51,8 +51,21 @@ export const TableRowPlay = ({ hoveredRow, index, id, uri, type, uris }: { type?
             }
             startPlayback(state)
           } else {
+            
             let state;
-            if (id === currentDataInfo?.track_window.current_track.id) {
+            if (context !== currentDataInfo?.track_window.current_track.album.uri) {
+
+              state = {
+                data: {
+                    context_uri: context,
+                    position_ms: 0,
+                    offset: {
+                      uri: uri,
+                    }
+                },
+                device_id: deviceIdValue
+              }              
+            } else if (id === currentDataInfo?.track_window.current_track.id) {
               state = {
                 data: {
                     context_uri: currentDataInfo.context.uri,
@@ -64,6 +77,8 @@ export const TableRowPlay = ({ hoveredRow, index, id, uri, type, uris }: { type?
                 device_id: deviceIdValue
               }
             } else {
+              console.log('ezfdszvsdv');
+              
               state = {
                 data: {
                     context_uri: currentDataInfo.context.uri,

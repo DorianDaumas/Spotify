@@ -4,7 +4,7 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { setInfoBtn, Track } from './redux/slices/player/playerInfoReadSong';
 import { useDispatch, useSelector } from 'react-redux';
-import { useGetPlaybackStateQuery } from './redux/services/spotifyApi';
+import { useLazyGetPlaybackStateQuery, useLazyGetPlayerQueueQuery } from './redux/services/spotifyApi';
 import { RootState } from './redux/store';
 import { setPlayerReady } from './redux/slices/player/playerReady';
 
@@ -18,10 +18,9 @@ export default function App() {
   const dispatch = useDispatch();
   const [player, setPlayer] = useState<Spotify.Player | null>(null);
   const token = useSelector((state: RootState) => state.auth.token);
+  const [getPlayerQueue] = useLazyGetPlayerQueueQuery()
 
-  const { refetch: refetchPlaybackState } = useGetPlaybackStateQuery(undefined, {
-    refetchOnMountOrArgChange: true
-  });
+  const [getPlaybackState] = useLazyGetPlaybackStateQuery()
 
   const initializeSpotifyPlayer = () => {
     if (!window.Spotify) {
@@ -43,7 +42,7 @@ export default function App() {
       console.log("Player online");
       dispatch(setPlayerReady({playerReady: true}))
       window.localStorage.setItem("device_id", device_id);
-      refetchPlaybackState()
+      getPlaybackState()
     });
 
     player.addListener('not_ready', () => {
@@ -101,11 +100,13 @@ export default function App() {
 
     setTimeout(async () => {
       try {
-        await refetchPlaybackState();
+        getPlayerQueue()
+        getPlaybackState()
+        
       } catch (error) {
-        console.error('Erreur lors du refetch:', error);
+        console.error('Erreur lors du refetch: refetchQueue:', error);
       }
-    }, 100);
+    }, 1000);
   });
 
   player.connect();
@@ -144,7 +145,7 @@ export default function App() {
 
     loadSpotifySDK();
 
-  }, [token, refetchPlaybackState]);
+  }, [token, getPlaybackState]);
   
   return (
     <ReactRouterAppProvider>

@@ -91,14 +91,14 @@ export const SearchResultBestResult = ({ data, type }: SearchResultBestResultPro
                 <Grid size={4}>
                     <div style={{width: '300px'}}>
                         <Typography variant="h5" mb={2}>
-                            Meilleur résultat {data.type}
+                            Meilleur résultat
                         </Typography>
                         <Link color='white' className="track-link" to={
                             data?.type === 'playlist' ? `/home/playlist?id=${data.id}`
                             : data?.type === 'album' ? `/home/album?id=${data.id}`
                             : `/home/artist?id=${data.id}`
                             }>
-                            <Card elevation={1} sx={{ height: '400', paddingLeft: 2}} >
+                            <Card elevation={1} sx={{ height: '400'}} >
                                 <CardActionArea color='red'>
                                         <CardMedia
                                             component="img"

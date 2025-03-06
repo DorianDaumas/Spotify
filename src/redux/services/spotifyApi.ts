@@ -390,9 +390,9 @@ export const {
 export const { useGetPopularPlaylistQuery, useGetRecommendationOnGenreQuery, useGetGlobalSearchQuery } = search
 export const { useShuffleQueueQuery, 
   useGetdeviceQuery, 
-  useGetPlaybackStateQuery, 
+  useLazyGetPlaybackStateQuery, 
   useStartPlaybackMutation, 
-  useGetPlayerQueueQuery, 
+  useLazyGetPlayerQueueQuery, 
   usePausePlaybackMutation,
   useGetCurrentPlayingTrackQuery,
   useNextTrackPlaybackMutation,

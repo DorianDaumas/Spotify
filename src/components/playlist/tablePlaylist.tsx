@@ -34,13 +34,13 @@ export default function TablePlaylist(props: PlaylistDetails) {
           {props.tracks.items.map((row, index) => (
             <TableRow
               hover
-              onMouseEnter={() => setHoveredRow(index+1)} // Suivre le survol
-              onMouseLeave={() => setHoveredRow(null)} // Réinitialiser le survol
+              onMouseEnter={() => setHoveredRow(index+1)} 
+              onMouseLeave={() => setHoveredRow(null)}
               key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell align="left">
-                <TableRowPlay hoveredRow={hoveredRow} uri={row.track.uri} index={index} id={row.track.id} />
+                <TableRowPlay hoveredRow={hoveredRow} context={props.uri} uri={row.track.uri} index={index} id={row.track.id} />
               </TableCell>
               <TableCell align="left">
                 <div style={{display: 'flex', alignItems: 'center'}}>
