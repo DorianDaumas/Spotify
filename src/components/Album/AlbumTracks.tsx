@@ -6,7 +6,7 @@ import { Link } from 'react-router'
 import { formatArtistIds } from "../../utils/formatArtistIds";
 import { useState } from "react";
 import { TableRowPlay } from "../player/tableRowPlay";
-export const AlbumTracks = ({  albumId }: { uri: string, albumId: string }) => {
+export const AlbumTracks = ({ context, albumId }: { uri: string, context: string, albumId: string }) => {
     const { data, isLoading } = useGetAlbumTracksQuery(albumId);
     const [hoveredRow, setHoveredRow] = useState<number | null>(null);
 
@@ -42,7 +42,7 @@ export const AlbumTracks = ({  albumId }: { uri: string, albumId: string }) => {
                                 sx={{ '& td, &:last-child th': { border: 0} }}
                             >
                             <TableCell align="left" color="#bdbdbd">
-                                <TableRowPlay hoveredRow={hoveredRow} index={index} id={row.id} uri={row.uri} />
+                                <TableRowPlay hoveredRow={hoveredRow} context={context} index={index} id={row.id} uri={row.uri} />
                             </TableCell>
                             <TableCell align="left">
                                 <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>

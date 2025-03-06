@@ -1,6 +1,6 @@
 import { List, Tooltip, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, ListSubheader } from "@mui/material"
 import { Link } from "react-router"
-import { useGetPlayerQueueQuery } from '../../redux/services/spotifyApi';
+import { useLazyGetPlayerQueueQuery } from '../../redux/services/spotifyApi';
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
@@ -8,9 +8,7 @@ import { CurrentQueueItem } from "../../redux/slices/player/playerQueue.interfac
 import { formatArtistIds } from "../../utils/formatArtistIds";
 
 export const PlayerQueue = () => {
-    const { data: currentQueue, refetch } = useGetPlayerQueueQuery(undefined, {
-        refetchOnMountOrArgChange: true,
-    });
+    const [getPlaybackState, { data: currentQueue }] = useLazyGetPlayerQueueQuery();
     const currentDataInfo = useSelector((state: RootState) => state.playerInfoReadSong);
     const cleanedArray = currentQueue?.queue.reduce((accumulateur: CurrentQueueItem[], element) => {
         if (!accumulateur.find((item: CurrentQueueItem) => item.name === element.name)) {
@@ -20,7 +18,7 @@ export const PlayerQueue = () => {
       }, []);
     
     useEffect(() => {
-       refetch();
+        getPlaybackState();
     }, [currentDataInfo])
     
     return (<>
@@ -50,8 +48,8 @@ export const PlayerQueue = () => {
     </List>
     <List sx={{overflow: 'auto', ml: 1}} disablePadding>
         {cleanedArray?.map((item, index) => (
-            <Link className="track-link" to={`/home/track?id=${item.id}&band=${item.artists[0].name}&title=${item.name}&artistId=${item.artists[0].id}&artistIds=${formatArtistIds(item.artists)}`}>
-                <Tooltip key={index} title={item.name} placement="left">
+            <Link key={index} className="track-link" to={`/home/track?id=${item.id}&band=${item.artists[0].name}&title=${item.name}&artistId=${item.artists[0].id}&artistIds=${formatArtistIds(item.artists)}`}>
+                <Tooltip  title={item.name} placement="left">
                     <ListItem disablePadding>
                         <ListItemButton sx={{padding: '5px 0px 5px 15px'}}>
                             <ListItemIcon>

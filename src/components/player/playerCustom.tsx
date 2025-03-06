@@ -1,5 +1,5 @@
-import { useGetPlaybackStateQuery, useGetPlayerQueueQuery, useGetUserProfilQuery, useNextTrackPlaybackMutation, usePrevTrackPlaybackMutation, useRepeatModeQuery, useSeekPositionPlaybackMutation, useShuffleQueueQuery, useVolumePlaybackMutation } from '../../redux/services/spotifyApi'
-import { Box, CircularProgress, IconButton, Slider, Stack, Typography } from '@mui/material'
+import { useLazyGetPlaybackStateQuery, useLazyGetPlayerQueueQuery, useGetUserProfilQuery, useNextTrackPlaybackMutation, usePrevTrackPlaybackMutation, useRepeatModeQuery, useSeekPositionPlaybackMutation, useShuffleQueueQuery, useVolumePlaybackMutation, useGetTrackLyricsQuery } from '../../redux/services/spotifyApi'
+import { Backdrop, Box, CircularProgress, IconButton, Slider, Stack, Typography } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
 import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 import VolumeDown from '@mui/icons-material/VolumeDown';
@@ -15,17 +15,17 @@ import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite
 import { convertirMillisecondes } from '../../utils/convertMs';
 import { Link } from 'react-router';
 import RepeatRoundedIcon from '@mui/icons-material/RepeatRounded';
+import LyricsRoundedIcon from '@mui/icons-material/LyricsRounded';
+import { formatText } from '../../utils/formatLyrics';
 
 export const PlayerCustom = ({ toggleDrawer, drawer }: {drawer: boolean, toggleDrawer: (data: boolean) => void}) => {
-    const {data: playbackState, refetch} = useGetPlaybackStateQuery(undefined, {
-        refetchOnMountOrArgChange: true,
-    });    
+    const [getPlaybackState, {data: playbackState}] = useLazyGetPlaybackStateQuery()
     const {data: userInfo} = useGetUserProfilQuery()
     
     const [open, setOpen] = useState(true);
     const [shuffle, setShuffle] = useState(false);
     const [repeat, setRepeat] = useState(false);
-    const {data: currentQueue} = useGetPlayerQueueQuery()
+    const [getPlayerQueue, {data: currentQueue}] = useLazyGetPlayerQueueQuery()
     const state = {
         state: shuffle,
         device_id: localStorage.getItem('device_id') ?? ''
@@ -38,11 +38,12 @@ export const PlayerCustom = ({ toggleDrawer, drawer }: {drawer: boolean, toggleD
     const {refetch: refetchRepeat} = useRepeatModeQuery(stateRepeat);    
     const currentDataInfo = useSelector((state: RootState) => state.playerInfoReadSong);
     const playerReady = useSelector((state: RootState) => state.playerReady);
+    const { data: dataLyrics, error: lyriscError, refetch: refetchLyrics } = useGetTrackLyricsQuery({track_band: currentDataInfo.track_window.current_track.artists[0].name, track_name: currentDataInfo.track_window.current_track.name})
     const [isPlaying, setIsPlaying] = useState<boolean>(!currentDataInfo?.paused);
     const intervalRef = useRef<number | null>(null);
     const [elapsedTime, setElapsedTime] = useState<number>(currentDataInfo.position);
     const [sliderTimeValue, setSliderTimeValue] = useState<number>(currentDataInfo.position);
-    const [sliderVolumeValue, setSliderVolumeValue] = useState<number | number[]>(playbackState?.device?.volume_percent ?? 50);
+    const [sliderVolumeValue, setSliderVolumeValue] = useState<number | number[]>(playbackState?.device?.volume_percent !== undefined ? playbackState?.device?.volume_percent : 50);
     const [nextTrackPlayback] = useNextTrackPlaybackMutation()
     const [prevTrackPlayback] = usePrevTrackPlaybackMutation()
     const [volumePlayback] = useVolumePlaybackMutation()
@@ -83,19 +84,22 @@ export const PlayerCustom = ({ toggleDrawer, drawer }: {drawer: boolean, toggleD
         } else {
             stopTimer()
         }
+        refetchLyrics()
 
         return () => {
             if (intervalRef.current) {
                 clearInterval(intervalRef.current);
             }
         };
-    }, [isPlaying, currentDataInfo]);
+    }, [isPlaying, currentDataInfo, getPlayerQueue]);
 
+    useEffect(() => {
+        getPlayerQueue()
+    }, [getPlayerQueue]);
 
     useEffect(() => {
         getStatePosition()
     }, [playerReady]);
-    
 
     useEffect(() => {
         setIsPlaying(!currentDataInfo?.paused);
@@ -112,6 +116,8 @@ export const PlayerCustom = ({ toggleDrawer, drawer }: {drawer: boolean, toggleD
     const handleSliderChange = (value: number) => {
         stopTimer()
         setSliderTimeValue(value);
+        setElapsedTime(value)
+        setSliderTimeValue(value)
     };
     
     const openDrawer = () => {
@@ -131,15 +137,27 @@ export const PlayerCustom = ({ toggleDrawer, drawer }: {drawer: boolean, toggleD
 
     const nextTrack = () => {
         nextTrackPlayback({device_id: localStorage.getItem('device_id') || ''}).then(() => {
-            refetch()
+            getPlaybackState()
+            setElapsedTime(0)
+            setSliderTimeValue(0)
         })
     }
 
     const prevTrack = () => {
         prevTrackPlayback({device_id: localStorage.getItem('device_id') || ''}).then(() => {
-            refetch()
+            getPlaybackState()
+            setElapsedTime(0)
+            setSliderTimeValue(0)
         })
     }
+
+    const [openLyrics, setOpenLyrics] = useState(false);
+    const handleClose = () => {
+        setOpenLyrics(false);
+    };
+    const handleOpen = () => {
+        setOpenLyrics(true);
+    }; 
 
 
 
@@ -212,7 +230,7 @@ export const PlayerCustom = ({ toggleDrawer, drawer }: {drawer: boolean, toggleD
                     </Link>
                 </div>
             </div>
-            <div style={{maxWidth: '400px', width: '100%'}}>
+            <div style={{maxWidth: '400px',zIndex: 999999999999, width: '100%'}}>
                 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '40px', paddingTop: 7}}>
                     <IconButton onClick={toggleShuffle} disabled={currentDataInfo?.track_window.current_track.uri === ''}>
                         <Tooltip placement="top" title={shuffle ? 'Désactiver la lecture aléatoire' : 'Activer la lecture aléatoire'}>
@@ -263,20 +281,46 @@ export const PlayerCustom = ({ toggleDrawer, drawer }: {drawer: boolean, toggleD
                             null
                         :
                         <div style={{display: 'flex'}}>
+                            <div style={{marginRight: '10px', marginTop: 3, cursor: 'pointer'}}>
+                                {
+                                    !lyriscError && dataLyrics ? 
+                                    <>
+                                    <Tooltip title="Paroles">
+                                        <div>
+                                            <LyricsRoundedIcon fontSize='medium' style={{color: openLyrics ? 'green' : 'grey'}} onClick={handleOpen}/>
+                                            <div>
+                                                <div className={currentQueue?.queue && currentQueue.queue?.length > 0 ? 'pastille-on' : 'pastille-off'}></div>
+                                            </div>
+                                        </div>
+                                    </Tooltip>
+                                    <Backdrop
+                                        sx={(theme) => ({ color: '#fff', backgroundColor: 'rgba(0, 0, 0, 0.77)', zIndex: theme.zIndex.drawer + 1 })}
+                                        open={openLyrics}
+                                        onClick={handleClose}
+                                    >
+                                        <div style={{maxWidth: '400px'}}>
+                                            {formatText(dataLyrics.lyrics)}
+                                        </div>
+                                    </Backdrop></>
+                                    :
+                                    null
+                                }
+
+                            </div>
                             <div onClick={openDrawer} style={{marginRight: '10px', cursor: 'pointer'}}>
                                 <Tooltip title="Ouvrir la fille d'attente">
                                     <div>
-                                        <QueueMusicIcon style={{color: currentQueue?.queue ? 'green' : 'grey'}} />
-                                        <span style={{width: 10, height: 10, borderRadius: 50, background: drawer ? 'green' : 'grey'}}>
+                                        <QueueMusicIcon fontSize='medium' style={{color: drawer ? 'green' : 'grey'}} />
+                                        <div>
                                             <div className={currentQueue?.queue && currentQueue.queue?.length > 0 ? 'pastille-on' : 'pastille-off'}></div>
-                                        </span>
+                                        </div>
                                     </div>
                                 </Tooltip>
                             </div>
                         </div>
                     }
                 </div>
-                <div style={{marginLeft: 10}}>
+                <div style={{zIndex: 999999999999,marginLeft: 10}}>
                     <Box sx={{ width: 200 }}>
                         <Stack spacing={2} direction="row" sx={{ alignItems: 'center', mb: 1 }}>
                             <VolumeDown color={currentDataInfo?.track_window.current_track.uri === '' ? 'disabled' : 'inherit'}/>

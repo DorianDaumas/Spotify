@@ -141,7 +141,7 @@ export const AlbumDetails = () => {
             </div>
             
             <div style={{margin: '10px 80px'}}>
-                <AlbumTracks uri={data.uri} albumId={data.id}/>
+                <AlbumTracks uri={data.uri} context={data.uri} albumId={data.id}/>
             </div>
             <br></br>
 
