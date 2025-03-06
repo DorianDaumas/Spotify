@@ -85,6 +85,8 @@ export const PlayerCustom = ({ toggleDrawer, drawer }: {drawer: boolean, toggleD
             stopTimer()
         }
         refetchLyrics()
+        getPlaybackState()
+        getPlayerQueue()
 
         return () => {
             if (intervalRef.current) {
@@ -92,14 +94,6 @@ export const PlayerCustom = ({ toggleDrawer, drawer }: {drawer: boolean, toggleD
             }
         };
     }, [isPlaying, currentDataInfo, getPlayerQueue]);
-
-    useEffect(() => {
-        getPlayerQueue()
-    }, [getPlayerQueue]);
-
-    useEffect(() => {
-        getStatePosition()
-    }, [playerReady]);
 
     useEffect(() => {
         setIsPlaying(!currentDataInfo?.paused);
