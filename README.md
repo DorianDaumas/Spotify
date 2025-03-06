@@ -163,5 +163,4 @@ Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abon
   - Ajouter les test e2e et unitaire avec vitest
   - Pouvoir créer une playlist perso
   - s'abonner à d'autres utilisateurs
-  - Ameliorer le responsive
   - Amelioration diverse et meileur responsive
