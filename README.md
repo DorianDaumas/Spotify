@@ -8,7 +8,8 @@ J'ai éssayé de respecter les bonnes pratiques avec un typage fort via Typescri
 
 Pour faire fonctionner le projet :
 - npm install
-- il faudra créer une "application" via le Dashboard de spotify avec votre compte pour pouvoir récuperer le client_id, la secret_key et définir la route callback
+- il faudra créer une "application" via le Dashboard de spotify avec votre compte pour pouvoir récuperer le client_id, la secret_key et définir la Redirect URI
+PS: la Redirect URI /callback ex: http://localhost:5174/callback (/callback est important c'est une route qui permet l'authentification et la sauvegarde des tokens etc )
   tout est éxpliqué ici ça prend 1 minute (la partie "Create an app" ) :
 #### https://developer.spotify.com/documentation/web-api/tutorials/getting-started ####
 
