@@ -2,7 +2,7 @@
 
 Ce projet à pour but de faire un clone de Spotify pour tester le Framework React et son écosystème (Redux RTK) avec typescript.
 J'ai éssayé de respecter les bonnes pratiques avec un typage fort via Typescript, des tests avec vitest et une architecture clair et lisible. 
-## (Le projet n'est pas fini et en cours de progression, il reste des choses a améliorées)
+## (C'est une v1, il reste des choses à améliorer)
 
 # IMPORTANT
 
