@@ -10,17 +10,16 @@ export const TableRowPlay = ({ hoveredRow, index, context, id, uri, type, uris }
 
     const currentDataInfo = useSelector((state: RootState) => state.playerInfoReadSong);
     const {data: userInfo} = useGetUserProfilQuery()
-
+  
     const [startPlayback] = useStartPlaybackMutation();
     const [pausePlayback] = usePausePlaybackMutation();
     
     const deviceIdValue = localStorage.getItem('device_id');              
-    if (typeof deviceIdValue !== 'string') {return;}
     
     const handleClick = (payload: string) => {
 
         if (payload === 'pause') {
-            const data = { device_id: deviceIdValue }
+            const data = { device_id: typeof deviceIdValue !== 'string' ? '' :  deviceIdValue }
             pausePlayback(data)
         } 
         if (payload === 'resume') {
@@ -35,7 +34,7 @@ export const TableRowPlay = ({ hoveredRow, index, context, id, uri, type, uris }
                       position: index,
                     }
                 },
-                device_id: deviceIdValue
+                device_id: typeof deviceIdValue !== 'string' ? '' :  deviceIdValue
               }
             } else {
               state = {
@@ -46,7 +45,7 @@ export const TableRowPlay = ({ hoveredRow, index, context, id, uri, type, uris }
                       position: index,
                     }
                 },
-                device_id: deviceIdValue
+                device_id: typeof deviceIdValue !== 'string' ? '' :  deviceIdValue
               }
             }
             startPlayback(state)
@@ -63,7 +62,7 @@ export const TableRowPlay = ({ hoveredRow, index, context, id, uri, type, uris }
                       uri: uri,
                     }
                 },
-                device_id: deviceIdValue
+                device_id: typeof deviceIdValue !== 'string' ? '' :  deviceIdValue
               }              
             } else if (id === currentDataInfo?.track_window.current_track.id) {
               state = {
@@ -74,11 +73,9 @@ export const TableRowPlay = ({ hoveredRow, index, context, id, uri, type, uris }
                       uri: currentDataInfo.track_window.current_track.uri,
                     }
                 },
-                device_id: deviceIdValue
+                device_id: typeof deviceIdValue !== 'string' ? '' :  deviceIdValue
               }
-            } else {
-              console.log('ezfdszvsdv');
-              
+            } else {             
               state = {
                 data: {
                     context_uri: currentDataInfo.context.uri,
@@ -87,7 +84,7 @@ export const TableRowPlay = ({ hoveredRow, index, context, id, uri, type, uris }
                       uri: uri,
                     }
                 },
-                device_id: deviceIdValue
+                device_id: typeof deviceIdValue !== 'string' ? '' :  deviceIdValue
               }
             }
             startPlayback(state)
@@ -135,13 +132,13 @@ export const TableRowPlay = ({ hoveredRow, index, context, id, uri, type, uris }
             </div>
         );
       }
-
+      
       if (userInfo?.product === 'free') {
-        return (
+        return (<>
             <Tooltip title='Vous devez avoir un compte premium pour écouter de la musique'>
                 <PlayArrowIcon color='disabled'  />   
             </Tooltip>
-        )
+        </>)
       }
     
       if (type === 'playlist') {

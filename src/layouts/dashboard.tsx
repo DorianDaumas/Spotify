@@ -110,7 +110,7 @@ export default function Layout() {
                 aria-haspopup="true"
               >
                 <Avatar sx={{ width: 55, height: 55, background: '#121212' }} >
-                  <Avatar sx={{ width: 38, height: 38 }} src={data?.images[0].url}></Avatar>
+                  <Avatar sx={{ width: 38, height: 38 }} src={data?.images[0]?.url}></Avatar>
                 </Avatar>
               </IconButton>
               <Menu {...bindMenu(popupState)}>

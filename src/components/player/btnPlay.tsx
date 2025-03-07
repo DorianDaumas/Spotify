@@ -25,7 +25,6 @@ export const BtnPlay = (payload: Payload) => {
 
 
     const deviceIdValue = localStorage.getItem('device_id');              
-    if (typeof deviceIdValue !== 'string') {return;}    
             
     const play = async () => {
         let state;
@@ -35,7 +34,7 @@ export const BtnPlay = (payload: Payload) => {
                     data: {
                         position_ms: currentDataInfo?.position,
                     },
-                    device_id: deviceIdValue
+                    device_id: typeof deviceIdValue !== 'string' ? '' :  deviceIdValue
                 }            
             } else {
                 state = {
@@ -43,7 +42,7 @@ export const BtnPlay = (payload: Payload) => {
                         context_uri: Array.isArray(payload.info.context_uri) ? payload.info.context_uri[0] : payload.info.context_uri,
                         position_ms: 0,
                     },
-                    device_id: deviceIdValue
+                    device_id: typeof deviceIdValue !== 'string' ? '' :  deviceIdValue
                 }
             }
         } else if (payload.info.type === 'user-liked-tracks') { 
@@ -57,7 +56,7 @@ export const BtnPlay = (payload: Payload) => {
                                 uri: findUri,
                             }
                         },
-                        device_id: deviceIdValue
+                        device_id: typeof deviceIdValue !== 'string' ? '' :  deviceIdValue
                     }
                 } else {
                     state = {
@@ -68,7 +67,7 @@ export const BtnPlay = (payload: Payload) => {
                                 position: 0,
                             }
                         },
-                        device_id: deviceIdValue
+                        device_id: typeof deviceIdValue !== 'string' ? '' :  deviceIdValue
                     }
                 }              
         } else if (payload.info.type === 'album') {            
@@ -77,7 +76,7 @@ export const BtnPlay = (payload: Payload) => {
                     data: {
                         position_ms: currentDataInfo?.position,
                     },
-                    device_id: deviceIdValue
+                    device_id: typeof deviceIdValue !== 'string' ? '' :  deviceIdValue
                 }    
             } else {
                 state = {
@@ -88,7 +87,7 @@ export const BtnPlay = (payload: Payload) => {
                             position: payload.info.offset ? payload.info.offset -1 : 0,
                         }
                     },
-                    device_id: deviceIdValue
+                    device_id: typeof deviceIdValue !== 'string' ? '' :  deviceIdValue
                 }
             }
         } else {
@@ -97,7 +96,7 @@ export const BtnPlay = (payload: Payload) => {
                     data: {
                         position_ms: currentDataInfo?.position,
                     },
-                    device_id: deviceIdValue
+                    device_id: typeof deviceIdValue !== 'string' ? '' :  deviceIdValue
                 }    
             } else {
                 state = {
@@ -108,14 +107,14 @@ export const BtnPlay = (payload: Payload) => {
                             position: payload.info.offset ? payload.info.offset -1 : 0,
                         }
                     },
-                    device_id: deviceIdValue
+                    device_id: typeof deviceIdValue !== 'string' ? '' :  deviceIdValue
                 }
             }
         }
         startPlayback(state)
     }
     const pause = () => {
-        const data = { device_id: deviceIdValue }
+        const data = { device_id: typeof deviceIdValue !== 'string' ? '' :  deviceIdValue }
         pausePlayback(data)
     }
 

@@ -46,6 +46,7 @@ export default function App() {
     });
 
     player.addListener('not_ready', () => {
+      dispatch(setPlayerReady({playerReady: false}))
     console.log('Player offline');
     });
 
