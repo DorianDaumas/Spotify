@@ -4,21 +4,40 @@ Ce projet à pour but de faire un clone de Spotify pour tester le Framework Reac
 J'ai éssayé de respecter les bonnes pratiques avec un typage fort via Typescript, des tests avec vitest et une architecture clair et lisible. 
 ## (Le projet n'est pas fini et en cours de progression, il reste des choses a améliorées)
 
-Pour que le projet fonctionne en local :
-- npm install
-- il faudra créer une "application" via le Dashboard de spotify pour pouvoir récuperer les différentes informations nécessaires :
+# IMPORTANT
 
+Pour faire fonctionner le projet :
+- npm install
+- il faudra créer une "application" via le Dashboard de spotify avec votre compte pour pouvoir récuperer le client_id, la secret_key et définir la route callback
+  tout est éxpliqué ici ça prend 1 minute (la partie "Create an app" ) :
 #### https://developer.spotify.com/documentation/web-api/tutorials/getting-started ####
 
-une fois les étapes suivantes et vos informations récupéré, vous pouvez créer un fichier .env pour y mettre le client_id, la redirect_uri etc
-(exemple d'utilisation dans le fichier dashboard.tsx)
-
+une fois vos informations récupéré, vous pouvez créer un fichier .env pour y mettre le client_id, la redirect_uri etc
+Dans l'application les noms des variables sont déjà défini dans le composant /Login :
+```
+    const CLIENT_ID = import.meta.env.VITE_CLIENT_ID 
+    const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI
+    const AUTH_ENDPOINT = import.meta.env.VITE_AUTH_ENDPOINT
+    const SCOPE = [
+        'streaming',
+        'user-read-email',
+        'user-read-private',
+        'user-library-read',
+        'user-library-modify',
+        'user-read-playback-state',
+        'user-modify-playback-state',
+        'user-read-currently-playing',
+        'user-top-read',
+        'playlist-modify-public',
+        'playlist-modify-private',
+    ]
+```
 Spotify utilise des scopes pour pouvoir utiliser leur api, les scopes sont nécessaires pour faire fonctionner le projet.
-Plus d'info -> https://developer.spotify.com/documentation/web-api/concepts/scopes
+Les scopes sont déjà défini dans l'app mais pour plus d'info -> https://developer.spotify.com/documentation/web-api/concepts/scopes
 
-
-# IMPORTANT
-Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas un abonnement premium, ce qui signifie que sans abonnement on ne peux plus écouter de musique... Les autres fonctionnalitées marchent cependant sans abonnement premium (Recherche, affichages des playlists / Artistes / Albums etc... Seulement le l'écoute n'est pas possible)
+## Info 
+Spotify ne permet plus les écoutes courtes (30 secondes) quand on a pas d'abonnement premium, ce qui signifie que sans abonnement on ne peux plus écouter de musique... 
+Les autres fonctionnalitées fonctionnes sans abonnement premium (Recherche, affichages des playlists / Artistes / Albums etc... Seulement l'écoute n'est plus possible)
 
 ### Techno utilisées
 - React
