@@ -13,7 +13,7 @@ Pour faire fonctionner le projet :
 #### https://developer.spotify.com/documentation/web-api/tutorials/getting-started ####
 
 une fois vos informations récupéré, vous pouvez créer un fichier .env pour y mettre le client_id, la redirect_uri etc
-Dans l'application les noms des variables sont déjà défini dans le composant /Login :
+Dans l'application les noms des variables sont déjà défini dans le composant [this text](../pages/Login) :
 ```
     const CLIENT_ID = import.meta.env.VITE_CLIENT_ID 
     const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI
