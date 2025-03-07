@@ -156,18 +156,17 @@ export const PlayerCustom = ({ toggleDrawer, drawer }: {drawer: boolean, toggleD
     const handleOpen = () => {
         setOpenLyrics(true);
     }; 
+    
 
-
-
-    if (!playerReady.playerReady) {
+    if (!playerReady.playerReady && userInfo?.product === 'premium') {
         return (<>
-        <div style={{display: 'flex', justifyContent: 'center', marginTop: 15}}>
-            <CircularProgress  color='success' />
-        </div>
+            <div style={{display: 'flex', justifyContent: 'center', marginTop: 15}}>
+                <CircularProgress  color='success' />
+            </div>
         </>)
     }
 
-    if(userInfo?.product === 'free' && playerReady.playerReady) {
+    if(userInfo?.product === 'free' && !playerReady.playerReady) {
         return (
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingLeft: '20px', paddingRight: '20px', height: '100%', maxHeight: '77px', overflow: 'auto'}}>
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>

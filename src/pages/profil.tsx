@@ -2,7 +2,7 @@ import Typography from '@mui/material/Typography';
 import { useState, useEffect } from 'react';
 import { getImageGradient } from '../utils/getBackgroundColor';
 import { useGetUserProfilQuery } from '../redux/services/spotifyApi';
-import { Card, CardActionArea, CardMedia, LinearProgress } from '@mui/material';
+import { Avatar, Card, CardActionArea, LinearProgress } from '@mui/material';
 import { UserTopArtists } from '../components/user/userTopArtists';
 
 export default function OrdersPage() {
@@ -42,13 +42,7 @@ export default function OrdersPage() {
       <div style={{display: 'flex', alignItems: 'end', marginLeft: '40px', marginTop: '75px'}}>
         <Card sx={{ maxWidth: 240, minWidth: 240, borderRadius: '50%', boxShadow: "rgb(1, 1, 1) 0px 4px 23px 4px" }}>
             <CardActionArea>
-                <CardMedia
-                    component="img"
-                    height="240"
-                    style={{borderRadius: '50%'}}
-                    image={data?.images[0].url}
-                    alt="poster playlist"
-                />
+            <Avatar sx={{ width: 240, height: 240 }} src={data?.images[0]?.url}></Avatar>
             </CardActionArea>
         </Card>
         <div style={{marginLeft: '20px'}}>
