@@ -5,7 +5,13 @@
 
 version: 2
 updates:
-  - package-ecosystem: "" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: "npm" # <-- C'est ici que l'erreur se trouvait
+    directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
+    groups:
+      security-updates:
+        patterns:
+          - "*"
+        update-types:
+          - "security"
