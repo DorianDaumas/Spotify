@@ -5,7 +5,7 @@
 
 version: 2
 updates:
-  - package-ecosystem: "npm" # <-- C'est ici que l'erreur se trouvait
+  - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "daily"
@@ -13,5 +13,3 @@ updates:
       security-updates:
         patterns:
           - "*"
-        update-types:
-          - "security"
